@@ -116,7 +116,7 @@ class AudioLinkResolver(private val context: Context) {
     private fun extractYouTubeVideoId(url: String): String? {
         val patterns = listOf(
             "(?:v=|/)([0-9A-Za-z_-]{11}).*",
-            "youtu\.be/([0-9A-Za-z_-]{11})",
+            "youtu\\.be/([0-9A-Za-z_-]{11})",
             "shorts/([0-9A-Za-z_-]{11})"
         )
         for (p in patterns) {
