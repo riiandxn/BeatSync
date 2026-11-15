@@ -1,13 +1,13 @@
 package com.beatsync.cut.render
 
 import android.graphics.Matrix
+import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
-import android.graphics.Typeface
 import androidx.media3.common.Effect
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.effect.MatrixTransformation
@@ -15,11 +15,13 @@ import androidx.media3.effect.OverlayEffect
 import androidx.media3.effect.OverlaySettings
 import androidx.media3.effect.RgbMatrix
 import androidx.media3.effect.TextOverlay
+import androidx.media3.effect.TextureOverlay
 import com.beatsync.cut.model.BeatFxType
 import com.beatsync.cut.model.ColorAdjustments
 import com.beatsync.cut.model.FilmLutPreset
 import com.beatsync.cut.model.TextFontStyle
 import com.beatsync.cut.model.TextOverlayConfig
+import com.google.common.collect.ImmutableList
 import kotlin.math.exp
 import kotlin.math.sin
 
@@ -184,8 +186,8 @@ object CinematicEffectFactory {
                 (-config.offsetY * 1.8f).coerceIn(-0.85f, 0.85f)
             )
             .build()
-        val overlay = TextOverlay.createStaticTextOverlay(spannable, settings)
-        return OverlayEffect(listOf(overlay))
+        val overlay: TextureOverlay = TextOverlay.createStaticTextOverlay(spannable, settings)
+        return OverlayEffect(ImmutableList.of(overlay))
     }
 
     private fun getLutMatrix(lutId: String): FloatArray {

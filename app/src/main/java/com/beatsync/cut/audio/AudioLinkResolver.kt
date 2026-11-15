@@ -106,9 +106,9 @@ class AudioLinkResolver(private val context: Context) {
                 onStatus("Mengambil info lagu Spotify...")
                 val query = fetchSpotifyTrackTitle(cleanUrl)
                     ?: return@withContext Result.failure(Exception("Gagal membaca metadata link Spotify"))
-                onStatus("Mencari audio "$query" di device...")
+                onStatus("Mencari audio \"$query\" di device...")
                 searchYoutubeFirstUrl(query)
-                    ?: return@withContext Result.failure(Exception("Lagu "$query" tidak ditemukan"))
+                    ?: return@withContext Result.failure(Exception("Lagu \"$query\" tidak ditemukan"))
             } else {
                 cleanUrl
             }
