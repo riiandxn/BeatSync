@@ -1,2 +1,3 @@
-# Keep Media3 classes
--keep class androidx.media3.** { *; }
+-keep class org.schabi.newpipe.** { *; }
+-dontwarn org.schabi.newpipe.**
+-keep class com.beatsync.cut.model.** { *; }
