@@ -1,0 +1,16 @@
+{
+  "name": "beatsync-cut",
+  "version": "2.2.1",
+  "description": "BeatSync Cut v2.2 - Beat Video Editor (9:16, 16:9, 4:5, 1:1) with Auto-Save Project History & Native Android Save",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Web assets ready in www/'",
+    "cap:sync": "npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/filesystem": "^6.0.1"
+  }
+}

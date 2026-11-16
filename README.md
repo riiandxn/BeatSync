@@ -1,15 +1,13 @@
-# BeatSync Cut v2.0 (Android)
+# BeatSync Cut v2.2 (with Project History & Native Android Export)
 
-Aplikasi video editing Android bergaya **CapCut & Instagram Edits** dengan tema **Obsidian Dark (`#0A0A0D`)** & aksen **Biru Pantone (`#0057B8`)**.
+Mobile-first beat-synced video editor with Instagram Edits-style center-locked playhead timeline, multi-aspect ratio support (**9:16**, **16:9**, **4:5**, **1:1**), **Auto-Save Project History**, **Native Android Filesystem Export (`@capacitor/filesystem`)**, direct video span sliding, title-based audio search, Film LUTs, Beat FX, and AI Auto Captions (including **ADVERCASE**).
 
-## Fitur Utama v2.0
-1. **Studio Workspace + 2-Step Auto Beat-Sync Wizard:** Langsung masuk ke layar editor manual atau gunakan wizard 2 langkah cepat untuk menyusun potongan video otomatis mengikuti beat lagu.
-2. **3-Layer Audio Resolver:** On-device `NewPipeExtractor` (YouTube & pencarian Spotify oEmbed), **Ekstrak Audio dari Video** (offline), serta import file MP3/M4A lokal.
-3. **Multi-Use Clip & 2-Level Slip-Trim:** Impor 1 video panjang (misal rekaman 3 menit) sekali saja ke Media Bin, lalu pakai berkali-kali di berbagai slot timeline dengan *Macro Scrub* + *Micro Scrub* independen.
-4. **Cinematic Film LUTs + Beat FX Selektif:** 12 preset warna film (Kodak Portra 400, CineStill 800T, Teal & Orange, Bleach Bypass, dll.), manual Adjust, Text Overlay geser langsung, serta efek *White Flash / Shake / Zoom Punch* selektif di titik drop.
-5. **Auto-Save Proyek Saya & Export 4K 30fps HEVC:** Penyimpanan draft otomatis dengan fitur Duplikat & Relink Media, serta hardware export hingga 4K 30fps / 1080p 60fps ke folder `Movies/BeatSync/`.
+## Fitur Penyimpanan & Proyek
+- **Auto-Save & Project History:** Setiap perubahan otomatis tersimpan ke memori aplikasi. Ketuk ikon menu kiri atas untuk membuka riwayat proyek, membuat draf baru, mengganti nama, menduplikasi versi (`9:16` vs `16:9`), atau memuat draf lama.
+- **Native Save APK (`@capacitor/filesystem`):** Saat tombol **Export** ditekan di dalam APK Android, video langsung disimpan ke folder **`Download/BeatSync-Cut/`** (atau **`Documents/BeatSync-Cut/`**) di penyimpanan internal HP.
 
-## Cara Build APK di GitHub
-1. Ekstrak file ZIP ini dan tampilkan file tersembunyi (`View -> Show -> Hidden items` di Windows, atau `Cmd + Shift + .` di Mac) agar folder `.github` terlihat.
-2. Buat repository baru di GitHub, klik **uploading an existing file**, lalu drag & drop seluruh isi di dalam folder ini dan klik **Commit changes**.
-3. Buka tab **Actions**, tunggu workflow **Build BeatSync Cut v2.0 APK** selesai (centang hijau), lalu unduh APK di bagian **Artifacts**.
+## Cara Build APK Otomatis di GitHub
+1. Extract seluruh isi ZIP ini lalu upload ke repository GitHub Anda (branch `main`).
+2. Buka tab **Actions** pada repository GitHub.
+3. Workflow **Build BeatSync Cut v2.2 APK** akan berjalan otomatis (~2-3 menit).
+4. Setelah centang hijau, unduh **`BeatSync-Cut-v2.2-APK`** di bagian **Artifacts** paling bawah.
