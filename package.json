@@ -1,7 +1,7 @@
 {
   "name": "beatsync-cut",
-  "version": "2.2.1",
-  "description": "BeatSync Cut v2.2 - Beat Video Editor (9:16, 16:9, 4:5, 1:1) with Auto-Save Project History & Native Android Save",
+  "version": "2.4.0",
+  "description": "BeatSync Cut v2.4 - Instagram Edits & CapCut Multi-Layer Filmstrip Timeline Video Editor (9:16, 16:9, 4:5, 1:1)",
   "private": true,
   "scripts": {
     "build": "echo 'Web assets ready in www/'",

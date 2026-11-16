@@ -4,21 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#0A0A0D" />
-  <title>BeatSync Cut v2.2</title>
+  <title>BeatSync Cut v2.4</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-obsidian: #0A0A0D;
+      --bg-obsidian: #0B0C0F;
       --bg-surface: #121318;
-      --bg-elevated: #1A1C24;
-      --bg-card: #222530;
+      --bg-elevated: #1A1C23;
+      --bg-card: #22252F;
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-strong: rgba(255, 255, 255, 0.16);
       --pantone-blue: #0057B8;
       --pantone-blue-bright: #1E78E6;
       --pantone-blue-glow: rgba(0, 87, 184, 0.35);
+      --edits-orange: #DF521B;
+      --edits-orange-border: #FF8A5B;
+      --edits-purple: #7C3AED;
+      --edits-purple-border: #C4B5FD;
       --text-primary: #F4F6FA;
       --text-secondary: #9AA2B4;
       --text-muted: #626A7D;
@@ -62,9 +66,9 @@
       padding-bottom: var(--safe-bottom);
     }
 
-    /* HEADER */
+    /* TOP HEADER (EDITS / CAPCUT STYLE) */
     .top-header {
-      height: 50px;
+      height: 48px;
       padding: 0 12px;
       display: flex;
       align-items: center;
@@ -78,15 +82,15 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       min-width: 0;
       flex: 1;
     }
 
     .icon-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
       background: var(--bg-elevated);
       border: 1px solid var(--border-subtle);
       color: var(--text-primary);
@@ -96,7 +100,7 @@
       cursor: pointer;
       flex-shrink: 0;
       position: relative;
-      transition: transform 0.12s ease, background 0.15s ease;
+      transition: transform 0.12s ease;
     }
 
     .icon-btn:active {
@@ -110,8 +114,8 @@
 
     .history-dot {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 4px;
+      right: 4px;
       width: 6px;
       height: 6px;
       border-radius: 50%;
@@ -119,25 +123,29 @@
       box-shadow: 0 0 6px var(--accent-emerald);
     }
 
-    .brand-stack {
+    .project-dropdown-btn {
       display: flex;
       flex-direction: column;
-      min-width: 0;
+      align-items: flex-start;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
       cursor: pointer;
+      min-width: 0;
+      text-align: left;
     }
 
-    .brand-group {
+    .project-title-row {
       display: flex;
       align-items: center;
-      gap: 5px;
-      min-width: 0;
-    }
-
-    .brand-title {
-      font-size: 13px;
+      gap: 4px;
+      font-size: 13.5px;
       font-weight: 800;
       letter-spacing: -0.02em;
-      color: var(--text-primary);
+      max-width: 165px;
+    }
+
+    .project-title-text {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -147,12 +155,6 @@
       font-size: 9.5px;
       font-weight: 700;
       color: #6EE7B7;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .header-right {
@@ -163,9 +165,9 @@
     }
 
     .pill-select {
-      height: 30px;
+      height: 29px;
       padding: 0 8px;
-      border-radius: 9px;
+      border-radius: 8px;
       background: var(--bg-elevated);
       border: 1px solid var(--border-subtle);
       color: var(--text-primary);
@@ -174,7 +176,7 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
     }
 
     .pill-select.highlight-ratio {
@@ -183,16 +185,16 @@
     }
 
     .btn-export {
-      height: 32px;
-      padding: 0 12px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--pantone-blue), var(--pantone-blue-bright));
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: #FFFFFF;
+      height: 30px;
+      padding: 0 13px;
+      border-radius: 999px;
+      background: #FFFFFF;
+      border: none;
+      color: #0B0C0F;
       font-size: 12px;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 4px 14px var(--pantone-blue-glow);
+      box-shadow: 0 3px 12px rgba(255, 255, 255, 0.2);
       transition: transform 0.12s ease;
     }
 
@@ -200,16 +202,16 @@
       transform: scale(0.95);
     }
 
-    /* PREVIEW STAGE */
+    /* PREVIEW STAGE WITH INTERACTIVE DRAGGABLE TEXT */
     .preview-stage {
       flex: 1;
-      min-height: 185px;
-      background: radial-gradient(circle at 50% 45%, #141722 0%, #090A0D 80%);
+      min-height: 170px;
+      background: #0B0C0F;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      padding: 12px 14px;
+      padding: 8px 14px;
       overflow: hidden;
     }
 
@@ -223,8 +225,9 @@
       background: #000;
       border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.78), 0 0 0 1px rgba(255, 255, 255, 0.12);
       transition: all 0.2s ease;
+      touch-action: none;
     }
 
     .canvas-frame.ratio-16-9 {
@@ -252,7 +255,6 @@
       display: block;
     }
 
-    /* Social & Widescreen Safe Zone Overlay */
     .safe-zone-overlay {
       position: absolute;
       inset: 0;
@@ -325,16 +327,16 @@
     .preview-floating-tools {
       position: absolute;
       right: 12px;
-      top: 12px;
+      top: 10px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       z-index: 5;
     }
 
     .mini-chip {
-      height: 28px;
-      padding: 0 9px;
+      height: 26px;
+      padding: 0 8px;
       border-radius: 8px;
       background: rgba(18, 19, 24, 0.84);
       backdrop-filter: blur(8px);
@@ -345,7 +347,7 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
 
     .mini-chip.active {
@@ -356,10 +358,10 @@
 
     .span-hud {
       position: absolute;
-      top: 12px;
+      top: 10px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(10, 10, 13, 0.9);
+      background: rgba(10, 10, 13, 0.92);
       border: 1px solid var(--pantone-blue-bright);
       color: #FFFFFF;
       font-size: 11px;
@@ -378,13 +380,12 @@
       opacity: 1;
     }
 
-    /* TRANSPORT BAR */
+    /* TRANSPORT BAR (EDITS / CAPCUT LAYOUT) */
     .transport-bar {
-      height: 44px;
+      height: 40px;
       padding: 0 12px;
-      background: var(--bg-surface);
+      background: var(--bg-obsidian);
       border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -398,61 +399,83 @@
     }
 
     .play-btn {
-      width: 34px;
-      height: 34px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: #FFFFFF;
-      color: #0A0A0D;
+      background: transparent;
+      color: #FFFFFF;
       border: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.22);
     }
 
-    .timecode-display {
+    .center-timecode-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.15;
+    }
+
+    .timecode-main {
       font-family: 'Space Mono', monospace;
       font-size: 11px;
       font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
+      color: #FFFFFF;
     }
 
-    .timecode-display span {
+    .timecode-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px;
       color: var(--text-muted);
     }
 
-    .badge-count {
-      font-size: 9px;
-      font-weight: 800;
-      padding: 1px 4px;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.12);
-      color: var(--text-secondary);
-      margin-left: 2px;
-    }
-
-    .auto-sync-btn {
-      height: 28px;
-      padding: 0 10px;
-      border-radius: 8px;
-      background: rgba(0, 87, 184, 0.2);
-      border: 1px solid rgba(30, 120, 230, 0.5);
-      color: #7CC0FF;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
+    .zoom-pill-group {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 7px;
+      height: 25px;
+      overflow: hidden;
     }
 
-    /* CLIP SPAN SUB-BAR */
+    .zoom-step-btn {
+      width: 22px;
+      height: 25px;
+      border: none;
+      background: transparent;
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .zoom-val-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: #93C5FD;
+      padding: 0 3px;
+    }
+
+    .badge-count {
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 3px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-secondary);
+      margin-left: 1px;
+    }
+
+    /* CONTEXT ACTION BAR (CAPCUT / EDITS QUICK ACTIONS) */
     .clip-subbar {
-      min-height: 36px;
-      padding: 4px 10px;
-      background: #0F1117;
+      min-height: 34px;
+      padding: 3px 10px;
+      background: #101217;
+      border-top: 1px solid var(--border-subtle);
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
@@ -467,13 +490,10 @@
     }
 
     .span-readout {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       color: #93C5FD;
       white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 5px;
     }
 
     .nudge-group {
@@ -484,76 +504,89 @@
     }
 
     .sub-pill {
-      height: 25px;
+      height: 24px;
       padding: 0 8px;
-      border-radius: 7px;
+      border-radius: 6px;
       background: var(--bg-elevated);
       border: 1px solid var(--border-strong);
       color: var(--text-primary);
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
+    }
+
+    .sub-pill:active {
+      transform: scale(0.95);
     }
 
     .sub-pill.primary {
-      background: rgba(0, 87, 184, 0.28);
+      background: rgba(0, 87, 184, 0.3);
       border-color: var(--pantone-blue-bright);
       color: #FFFFFF;
     }
 
-    .sub-pill.success {
-      background: rgba(16, 185, 129, 0.22);
-      border-color: rgba(16, 185, 129, 0.55);
-      color: #6EE7B7;
+    .sub-pill.orange {
+      background: rgba(223, 82, 27, 0.25);
+      border-color: var(--edits-orange-border);
+      color: #FDBA74;
+    }
+
+    .sub-pill.purple {
+      background: rgba(124, 58, 237, 0.25);
+      border-color: var(--edits-purple-border);
+      color: #DDD6FE;
     }
 
     .sub-pill.danger {
       color: #FDA4AF;
-      border-color: rgba(244, 63, 94, 0.35);
+      border-color: rgba(244, 63, 94, 0.38);
     }
 
-    /* EDITS TIMELINE */
+    /* =====================================================================
+       MULTI-LAYER STACKED TIMELINE (INSTAGRAM EDITS + CAPCUT HYBRID)
+       ===================================================================== */
     .timeline-wrapper {
-      height: 194px;
+      height: 236px;
       background: #0C0D11;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       flex-shrink: 0;
-      touch-action: none;
+      touch-action: pan-y;
+    }
+
+    .timeline-wrapper::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .timeline-wrapper::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 3px;
     }
 
     .center-playhead {
-      position: absolute;
+      position: sticky;
       top: 0;
-      bottom: 0;
       left: 50%;
       width: 2px;
+      height: 100%;
+      min-height: 236px;
       background: #FFFFFF;
       transform: translateX(-50%);
-      z-index: 20;
+      z-index: 30;
       pointer-events: none;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.75);
-    }
-
-    .center-playhead::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 10px;
-      height: 10px;
-      background: #FFFFFF;
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      float: left;
     }
 
     .timeline-scroll-area {
-      position: absolute;
-      inset: 0;
+      position: relative;
+      width: 100%;
+      min-height: 236px;
       cursor: grab;
     }
 
@@ -562,119 +595,195 @@
     }
 
     .timeline-canvas-content {
-      position: absolute;
-      top: 0;
-      bottom: 0;
+      position: relative;
       left: 50%;
+      padding-bottom: 18px;
       will-change: transform;
     }
 
+    /* Ruler with tick dots like CapCut / Edits */
     .beat-ruler {
-      height: 24px;
-      border-bottom: 1px solid var(--border-subtle);
+      height: 22px;
       position: relative;
-    }
-
-    .ruler-tick {
-      position: absolute;
-      bottom: 0;
-      width: 1px;
-      background: rgba(255, 255, 255, 0.16);
-      height: 6px;
-    }
-
-    .ruler-tick.major {
-      height: 11px;
-      background: rgba(255, 255, 255, 0.36);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .ruler-label {
       position: absolute;
-      top: 3px;
+      top: 4px;
       transform: translateX(-50%);
       font-family: 'Space Mono', monospace;
       font-size: 9px;
       color: var(--text-muted);
     }
 
+    .ruler-dot {
+      position: absolute;
+      top: 9px;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateX(-50%);
+    }
+
     .beat-dot-marker {
       position: absolute;
-      bottom: 3px;
-      width: 5px;
-      height: 5px;
+      bottom: 2px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
       background: var(--pantone-blue-bright);
       transform: translateX(-50%);
-      box-shadow: 0 0 6px var(--pantone-blue-bright);
     }
 
-    .caption-track-row {
-      height: 26px;
-      margin-top: 6px;
+    .beat-dot-marker.detected {
+      background: #22D3EE;
+      box-shadow: 0 0 6px #22D3EE;
+    }
+
+    /* STACKED LAYER BARS (EDITS STYLE: ORANGE FILTER BARS + PURPLE TEXT BARS) */
+    .stacked-layer-row {
+      height: 30px;
+      margin-top: 4px;
       position: relative;
     }
 
-    .caption-pill-bar {
+    .layer-span-pill {
       position: absolute;
-      top: 1px;
-      height: 22px;
-      border-radius: 6px;
-      background: rgba(245, 158, 11, 0.18);
-      border: 1px solid rgba(245, 158, 11, 0.55);
-      color: #FDE68A;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 0 8px;
+      top: 0;
+      height: 28px;
+      border-radius: 7px;
+      padding: 0 9px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      overflow: hidden;
+      font-size: 11px;
+      font-weight: 800;
+      color: #FFFFFF;
+      cursor: pointer;
+      overflow: visible;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .layer-span-pill.lut-orange {
+      background: var(--edits-orange);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .layer-span-pill.text-purple {
+      background: var(--edits-purple);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .layer-span-pill.selected {
+      outline: 2px solid #FFFFFF;
+      z-index: 12;
+    }
+
+    .layer-pill-label {
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      pointer-events: none;
+    }
+
+    .layer-trim-handle {
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      width: 14px;
+      background: #FFFFFF;
+      color: #0B0C0F;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 900;
+      cursor: ew-resize;
+      z-index: 18;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .layer-span-pill.selected .layer-trim-handle {
+      display: flex;
+    }
+
+    .layer-trim-handle.left {
+      left: -6px;
+      border-radius: 6px 2px 2px 6px;
+    }
+
+    .layer-trim-handle.right {
+      right: -6px;
+      border-radius: 2px 6px 6px 2px;
+    }
+
+    /* MAIN VIDEO FILMSTRIP TRACK + WHITE '+' BUTTON (EDITS & CAPCUT) */
+    .video-track-row {
+      height: 58px;
+      margin-top: 6px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .capcut-mute-anchor {
+      position: absolute;
+      left: -62px;
+      top: 4px;
+      width: 52px;
+      height: 50px;
+      border-radius: 9px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-size: 9px;
+      font-weight: 700;
       cursor: pointer;
     }
 
-    .video-track-row {
-      height: 64px;
-      margin-top: 6px;
-      position: relative;
+    .capcut-mute-anchor.muted {
+      border-color: var(--accent-rose);
+      color: #FDA4AF;
+      background: rgba(244, 63, 94, 0.16);
     }
 
     .video-clip-block {
       position: absolute;
-      top: 4px;
-      height: 56px;
-      border-radius: 10px;
-      background: var(--bg-card);
-      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      top: 2px;
+      height: 54px;
+      border-radius: 9px;
+      background: #1B1E26;
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
       overflow: visible;
       display: flex;
       align-items: center;
-      transition: opacity 0.15s ease;
-    }
-
-    .video-clip-block.dimmed {
-      opacity: 0.32;
     }
 
     .video-clip-block.selected {
-      border: 2.5px solid var(--pantone-blue-bright);
-      box-shadow: 0 0 0 2px rgba(0, 87, 184, 0.3), 0 6px 18px rgba(0, 0, 0, 0.55);
-      z-index: 8;
+      border: 2.5px solid #FFFFFF;
+      box-shadow: 0 0 0 2px rgba(0, 87, 184, 0.45), 0 6px 16px rgba(0, 0, 0, 0.65);
+      z-index: 10;
     }
 
     .ghost-filmstrip {
       position: absolute;
       top: -2px;
       bottom: -2px;
-      border-radius: 9px;
+      border-radius: 8px;
       background: repeating-linear-gradient(
         90deg,
-        rgba(30, 120, 230, 0.12) 0px,
-        rgba(30, 120, 230, 0.12) 18px,
+        rgba(30, 120, 230, 0.14) 0px,
+        rgba(30, 120, 230, 0.14) 18px,
         rgba(255, 255, 255, 0.04) 18px,
         rgba(255, 255, 255, 0.04) 36px
       );
-      border: 1px dashed rgba(96, 165, 250, 0.55);
+      border: 1px dashed rgba(96, 165, 250, 0.6);
       pointer-events: none;
       z-index: -1;
       opacity: 0;
@@ -686,24 +795,41 @@
       opacity: 1;
     }
 
-    .clip-inner-strip {
+    /* Filmstrip thumbnail tiles inside video clip */
+    .filmstrip-frames-strip {
       width: 100%;
       height: 100%;
-      border-radius: 8px;
+      border-radius: 7px;
       overflow: hidden;
-      padding: 5px 12px;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       position: relative;
       cursor: grab;
     }
 
+    .filmstrip-thumb-cell {
+      flex: 1;
+      min-width: 26px;
+      height: 100%;
+      border-right: 1px solid rgba(0, 0, 0, 0.35);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .clip-overlay-badges {
+      position: absolute;
+      inset: 3px 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
     .clip-name-tag {
-      font-size: 10.5px;
+      font-size: 9.5px;
       font-weight: 800;
       color: #FFFFFF;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -713,14 +839,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 9px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.82);
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #FFFFFF;
     }
 
     .clip-badge {
-      background: rgba(0, 0, 0, 0.55);
-      padding: 1px 5px;
+      background: rgba(0, 0, 0, 0.68);
+      padding: 1px 4px;
       border-radius: 4px;
     }
 
@@ -728,15 +854,15 @@
       position: absolute;
       top: -3px;
       bottom: -3px;
-      width: 24px;
-      background: var(--pantone-blue-bright);
-      border: 1.5px solid #FFFFFF;
+      width: 22px;
+      background: #FFFFFF;
+      border: 1.5px solid #0B0C0F;
       display: none;
       align-items: center;
       justify-content: center;
       cursor: ew-resize;
-      z-index: 15;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      z-index: 16;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
     }
 
     .video-clip-block.selected .pill-handle {
@@ -744,40 +870,40 @@
     }
 
     .pill-handle.left {
-      left: -12px;
-      border-radius: 8px 3px 3px 8px;
+      left: -11px;
+      border-radius: 8px 2px 2px 8px;
     }
 
     .pill-handle.right {
-      right: -12px;
-      border-radius: 3px 8px 8px 3px;
+      right: -11px;
+      border-radius: 2px 8px 8px 2px;
     }
 
     .pill-grip {
       width: 3px;
-      height: 18px;
-      border-left: 1.5px solid #FFFFFF;
-      border-right: 1.5px solid #FFFFFF;
+      height: 16px;
+      border-left: 1.5px solid #0B0C0F;
+      border-right: 1.5px solid #0B0C0F;
     }
 
     .transition-node {
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 22px;
-      height: 22px;
-      border-radius: 7px;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
       background: #141720;
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
       color: #FFFFFF;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 16;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      z-index: 18;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
     }
 
     .transition-node.active-fx {
@@ -785,20 +911,45 @@
       border-color: #93C5FD;
     }
 
+    /* White square '+' button attached at end of video track (Edits & CapCut) */
+    .end-track-plus-btn {
+      position: absolute;
+      top: 6px;
+      width: 38px;
+      height: 46px;
+      border-radius: 9px;
+      background: #FFFFFF;
+      color: #0B0C0F;
+      border: none;
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+      z-index: 9;
+    }
+
+    .end-track-plus-btn:active {
+      transform: scale(0.93);
+    }
+
+    /* CAPCUT LANES BELOW VIDEO: AUDIO BAR & QUICK '+ Add text' / '+ Add filter' */
     .audio-track-row {
-      height: 44px;
-      margin-top: 8px;
+      height: 36px;
+      margin-top: 6px;
       position: relative;
     }
 
     .audio-clip-bar {
       position: absolute;
-      top: 2px;
-      height: 40px;
-      border-radius: 9px;
-      background: linear-gradient(90deg, rgba(0, 87, 184, 0.32), rgba(34, 211, 238, 0.18));
-      border: 1.5px solid rgba(56, 189, 248, 0.55);
-      padding: 4px 10px;
+      top: 0;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, rgba(0, 87, 184, 0.34), rgba(34, 211, 238, 0.2));
+      border: 1px solid rgba(56, 189, 248, 0.55);
+      padding: 3px 9px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -807,7 +958,7 @@
     }
 
     .audio-title-line {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
       color: #E0F2FE;
       display: flex;
@@ -820,56 +971,82 @@
       display: flex;
       align-items: flex-end;
       gap: 2px;
-      height: 16px;
+      height: 12px;
     }
 
     .mini-wave-bar {
       flex: 1;
-      background: rgba(125, 211, 252, 0.78);
+      background: rgba(125, 211, 252, 0.8);
       border-radius: 2px;
       min-width: 2px;
     }
 
-    /* BOTTOM DOCK */
+    .capcut-quick-lanes {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .quick-lane-btn {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--text-secondary);
+      font-size: 10.5px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .quick-lane-btn:active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+    }
+
+    /* BOTTOM DOCK (EDITS / CAPCUT STYLE) */
     .bottom-dock {
-      height: 62px;
-      background: var(--bg-surface);
+      height: 60px;
+      background: var(--bg-obsidian);
       border-top: 1px solid var(--border-subtle);
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      padding: 4px 6px;
-      gap: 4px;
+      padding: 4px 4px;
+      gap: 2px;
       flex-shrink: 0;
     }
 
     .dock-item {
       border: none;
       background: transparent;
-      border-radius: 10px;
+      border-radius: 9px;
       color: var(--text-secondary);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 3px;
       font-size: 10px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
     }
 
     .dock-item:active, .dock-item.active {
-      background: rgba(0, 87, 184, 0.22);
+      background: rgba(255, 255, 255, 0.08);
       color: #FFFFFF;
     }
 
-    /* BOTTOM SHEETS & MODALS */
+    /* BOTTOM SHEETS */
     .sheet-backdrop {
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.68);
       backdrop-filter: blur(4px);
-      z-index: 40;
+      z-index: 50;
       display: none;
       flex-direction: column;
       justify-content: flex-end;
@@ -884,7 +1061,7 @@
       border-top: 1px solid var(--border-strong);
       border-radius: 20px 20px 0 0;
       padding: 14px 16px calc(16px + var(--safe-bottom));
-      max-height: 82dvh;
+      max-height: 84dvh;
       overflow-y: auto;
       animation: slideUp 0.2s ease-out;
     }
@@ -970,7 +1147,7 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      max-height: 180px;
+      max-height: 170px;
       overflow-y: auto;
       margin-bottom: 12px;
     }
@@ -979,7 +1156,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 9px 10px;
+      padding: 8px 10px;
       border-radius: 10px;
       background: var(--bg-elevated);
       border: 1px solid var(--border-subtle);
@@ -1137,24 +1314,21 @@
       color: var(--text-secondary);
     }
 
-    .caption-line-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
+    .rec-pulse-btn {
+      background: rgba(244, 63, 94, 0.22) !important;
+      border-color: #F43F5E !important;
+      color: #FDA4AF !important;
+      animation: pulseRec 1s infinite alternate;
     }
 
-    .caption-time-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      color: var(--text-secondary);
-      width: 66px;
-      flex-shrink: 0;
+    @keyframes pulseRec {
+      from { opacity: 0.75; }
+      to { opacity: 1; }
     }
 
     .toast-pill {
       position: absolute;
-      bottom: 72px;
+      bottom: 70px;
       left: 50%;
       transform: translateX(-50%) translateY(10px);
       background: rgba(18, 19, 24, 0.95);
@@ -1184,36 +1358,41 @@
 </head>
 <body>
   <div class="app-shell">
+    <!-- Hidden Native Pickers -->
     <input type="file" id="videoFileInput" class="hidden-input" accept="video/*" />
+    <input type="file" id="appendVideoFileInput" class="hidden-input" accept="video/*" />
     <input type="file" id="audioFileInput" class="hidden-input" accept="audio/*" />
+    <input type="file" id="extractVideoAudioInput" class="hidden-input" accept="video/*" />
+    <input type="file" id="customFontFileInput" class="hidden-input" accept=".ttf,.otf,.woff,.woff2" />
 
-    <!-- HEADER -->
+    <!-- TOP HEADER (EDITS / CAPCUT STYLE) -->
     <header class="top-header">
       <div class="header-left">
-        <button class="icon-btn" id="btnMenuProject" title="Riwayat Proyek &amp; Pengaturan">
-          <span class="history-dot" id="historyDotIndicator"></span>
+        <button class="icon-btn" id="btnMenuProject" title="Riwayat Proyek">
+          <span class="history-dot"></span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
             <line x1="4" y1="7" x2="20" y2="7"></line>
             <line x1="4" y1="12" x2="20" y2="12"></line>
             <line x1="4" y1="17" x2="14" y2="17"></line>
           </svg>
         </button>
-        <div class="brand-stack" id="brandProjectTrigger" title="Ketuk untuk buka Riwayat Proyek">
-          <div class="brand-group">
-            <span class="brand-title" id="headerProjectName">BeatSync Cut</span>
+        <button class="project-dropdown-btn" id="brandProjectTrigger" title="Buka Riwayat Proyek">
+          <div class="project-title-row">
+            <span class="project-title-text" id="headerProjectName">BeatSync Project</span>
+            <span style="font-size:10px;opacity:0.7;">▾</span>
           </div>
           <div class="save-status-line" id="autoSaveBadge">● Draf Tersimpan</div>
-        </div>
+        </button>
       </div>
 
       <div class="header-right">
         <button class="pill-select highlight-ratio" id="btnAspectRatio" title="Ganti Rasio (9:16 / 16:9 / 4:5 / 1:1)">9:16</button>
-        <button class="pill-select" id="btnResolution">1080p</button>
+        <button class="pill-select" id="btnResolution">FHD</button>
         <button class="btn-export" id="btnExport">Export</button>
       </div>
     </header>
 
-    <!-- PREVIEW STAGE -->
+    <!-- PREVIEW STAGE (WITH DIRECT DRAGGABLE TEXT LAYERS) -->
     <main class="preview-stage">
       <div class="span-hud" id="spanHud">Potongan: 03.0d – 05.0d / 13.0d</div>
 
@@ -1232,84 +1411,65 @@
       </div>
 
       <div class="preview-floating-tools">
-        <button class="mini-chip" id="btnToggleSafeZone" title="Panduan Batas Aman Layar">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <rect x="3" y="3" width="18" height="18" rx="3"></rect>
-            <line x1="3" y1="15" x2="21" y2="15"></line>
-          </svg>
-          Safe Zone
-        </button>
-        <button class="mini-chip active" id="btnToggleHaptic" title="Getaran Haptic Saat Beat Snap">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <path d="M5 8v8M2 10v4M19 8v8M22 10v4"></path>
-            <rect x="8" y="5" width="8" height="14" rx="2"></rect>
-          </svg>
-          Haptic
-        </button>
+        <button class="mini-chip" id="btnToggleSafeZone" title="Panduan Batas Aman">Safe Zone</button>
+        <button class="mini-chip active" id="btnToggleHaptic" title="Getaran Haptic Beat">Haptic</button>
       </div>
     </main>
 
-    <!-- TRANSPORT & UNDO/REDO BAR -->
+    <!-- TRANSPORT BAR (EDITS / CAPCUT STYLE) -->
     <section class="transport-bar">
       <div class="transport-group">
-        <button class="icon-btn" id="btnStepBack" title="Mundur 0.1d">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-          </svg>
-        </button>
         <button class="play-btn" id="btnPlayPause" title="Putar / Jeda">
-          <svg id="iconPlay" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <svg id="iconPlay" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M8 5v14l11-7z"/>
           </svg>
-          <svg id="iconPause" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+          <svg id="iconPause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
             <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
           </svg>
         </button>
-        <button class="icon-btn" id="btnStepForward" title="Maju 0.1d">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-          </svg>
-        </button>
-        <div class="timecode-display" id="timecodeText">00:00.0 <span>/ 00:08.4</span></div>
+        <div class="zoom-pill-group" title="Zoom Timeline (atau Pinch 2 Jari)">
+          <button class="zoom-step-btn" id="btnZoomOut">−</button>
+          <span class="zoom-val-label" id="zoomLevelText">1.0x</span>
+          <button class="zoom-step-btn" id="btnZoomIn">+</button>
+        </div>
+      </div>
+
+      <div class="center-timecode-stack">
+        <div class="timecode-main" id="timecodeMain">00:01.8</div>
+        <div class="timecode-sub" id="timecodeSub">00:08.4</div>
       </div>
 
       <div class="transport-group">
-        <button class="icon-btn" id="btnUndo" disabled title="Undo (Ctrl+Z)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+        <button class="icon-btn" id="btnUndo" disabled title="Undo" style="width:28px;height:28px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 7v6h6"></path>
             <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
           </svg>
           <span class="badge-count" id="undoBadge">0</span>
         </button>
-        <button class="icon-btn" id="btnRedo" disabled title="Redo (Ctrl+Y)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+        <button class="icon-btn" id="btnRedo" disabled title="Redo" style="width:28px;height:28px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 7v6h-6"></path>
             <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"></path>
           </svg>
           <span class="badge-count" id="redoBadge">0</span>
         </button>
-        <button class="auto-sync-btn" id="btnAutoBeatSync" title="Otomatis Potong Sesuai Beat">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-          Auto Beat
-        </button>
       </div>
     </section>
 
-    <!-- SELECTED CLIP SPAN SUB-BAR -->
+    <!-- CONTEXT ACTION SUB-BAR -->
     <section class="clip-subbar" id="clipSubBar">
-      <div class="span-readout" id="spanReadoutText">Potongan: 03.0d – 05.0d / 13.0d</div>
+      <div class="span-readout" id="spanReadoutText">03.0d–05.0d / 13.0d</div>
       <div class="nudge-group">
-        <button class="sub-pill" id="btnNudgeLeft">-0.1d</button>
-        <button class="sub-pill" id="btnNudgeRight">+0.1d</button>
-        <button class="sub-pill primary" id="btnImportVideo">+ Video</button>
-        <button class="sub-pill" id="btnVelocitySheet">Velocity</button>
-        <button class="sub-pill danger" id="btnDeleteClip">Hapus</button>
+        <button class="sub-pill" id="btnNudgeLeft">Slip -0.1</button>
+        <button class="sub-pill" id="btnNudgeRight">Slip +0.1</button>
+        <button class="sub-pill primary" id="btnDuplicateClip">Duplikat</button>
+        <button class="sub-pill" id="btnAutoBeatSync">⚡ Beat Sync</button>
+        <button class="sub-pill danger" id="btnDeleteSelectedLayer">Hapus</button>
       </div>
     </section>
 
-    <!-- CENTER-LOCKED PLAYHEAD TIMELINE -->
+    <!-- MULTI-LAYER STACKED TIMELINE (EDITS ORANGE/PURPLE LAYERS + CAPCUT FILMSTRIP) -->
     <section class="timeline-wrapper" id="timelineWrapper">
       <div class="center-playhead"></div>
       <div class="timeline-scroll-area" id="timelineScrollArea">
@@ -1317,18 +1477,26 @@
       </div>
     </section>
 
-    <!-- 6-TOOL STUDIO BOTTOM DOCK -->
+    <!-- 6-TOOL BOTTOM DOCK (EDITS / CAPCUT STYLE) -->
     <nav class="bottom-dock">
       <button class="dock-item" data-tool="audio">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
           <path d="M9 18V5l12-2v13"></path>
           <circle cx="6" cy="18" r="3"></circle>
           <circle cx="18" cy="16" r="3"></circle>
         </svg>
         Audio
       </button>
+      <button class="dock-item" data-tool="text">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <polyline points="4 7 4 4 20 4 20 7"></polyline>
+          <line x1="9" y1="20" x2="15" y2="20"></line>
+          <line x1="12" y1="4" x2="12" y2="20"></line>
+        </svg>
+        Text
+      </button>
       <button class="dock-item" data-tool="split">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
           <line x1="12" y1="3" x2="12" y2="21"></line>
           <polyline points="8 7 4 12 8 17"></polyline>
           <polyline points="16 7 20 12 16 17"></polyline>
@@ -1336,45 +1504,36 @@
         Split
       </button>
       <button class="dock-item" data-tool="fx">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
           <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
         </svg>
         Beat FX
       </button>
       <button class="dock-item" data-tool="lut">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
           <circle cx="12" cy="12" r="9"></circle>
           <circle cx="12" cy="12" r="3"></circle>
         </svg>
-        Film LUT
+        Adjust/LUT
       </button>
       <button class="dock-item" data-tool="captions">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
           <rect x="3" y="5" width="18" height="14" rx="3"></rect>
           <line x1="7" y1="10" x2="13" y2="10"></line>
           <line x1="7" y1="14" x2="17" y2="14"></line>
         </svg>
         Captions
       </button>
-      <button class="dock-item" data-tool="media">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
-          <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
-          <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
-          <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
-          <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
-        </svg>
-        Media Bin
-      </button>
     </nav>
 
     <!-- TOAST -->
     <div class="toast-pill" id="toastPill">Siap</div>
 
-    <!-- SHEET 1: AUDIO SEARCH & WAVEFORM SPAN -->
+    <!-- SHEET 1: AUDIO, EXTRACT VIDEO & BEAT DETECTOR -->
     <div class="sheet-backdrop" id="sheetAudio">
       <div class="bottom-sheet">
         <div class="sheet-header">
-          <span class="sheet-title">Cari Lagu &amp; Atur Bagian Beat</span>
+          <span class="sheet-title">Audio, Ekstrak Video &amp; Deteksi Beat</span>
           <button class="sheet-close" data-close="sheetAudio">Selesai</button>
         </div>
 
@@ -1386,14 +1545,15 @@
         </div>
 
         <div class="search-row">
-          <input type="text" class="text-input" id="audioSearchInput" placeholder="Ketik judul lagu (tanpa link)..." />
+          <input type="text" class="text-input" id="audioSearchInput" placeholder="Ketik judul lagu..." />
           <button class="sub-pill primary" id="btnImportLocalAudio" style="height:36px;">MP3 Lokal</button>
+          <button class="sub-pill" id="btnExtractVideoAudio" style="height:36px;border-color:#10B981;color:#6EE7B7;">Ekstrak Video</button>
         </div>
 
         <div class="song-list" id="songCatalogList"></div>
 
         <div class="sheet-header" style="margin-bottom:6px;">
-          <span style="font-size:11px;font-weight:700;color:#93C5FD;" id="audioSpanLabel">Mulai Lagu: 01:12.0 (Chorus Drop)</span>
+          <span style="font-size:11px;font-weight:700;color:#93C5FD;" id="audioSpanLabel">Mulai Lagu: 01:12.0 (142 BPM)</span>
           <div class="nudge-group">
             <button class="sub-pill" id="btnAudioNudgeLeft">-0.1d</button>
             <button class="sub-pill primary" id="btnSnapChorusDrop">Snap Drop</button>
@@ -1438,65 +1598,81 @@
       </div>
     </div>
 
-    <!-- SHEET 3: FILM LUT -->
+    <!-- SHEET 3: STACKED ORANGE FILTER / LUT LAYER STUDIO -->
     <div class="sheet-backdrop" id="sheetLut">
       <div class="bottom-sheet">
         <div class="sheet-header">
-          <span class="sheet-title">Color Grading &amp; Film LUT</span>
+          <span class="sheet-title">Filter &amp; Film LUT Layer (Orange Track)</span>
           <button class="sheet-close" data-close="sheetLut">Tutup</button>
         </div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+          Ketuk preset untuk mengubah layer Filter aktif atau tambahkan layer Filter baru bertumpuk di timeline.
+        </div>
         <div class="option-grid" id="lutGrid"></div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;">
+          <button class="sub-pill orange" id="btnAddNewLutLayer" style="flex:1;justify-content:center;height:34px;">+ Tambah Layer Filter Baru</button>
+        </div>
         <div class="slider-row" style="margin-bottom:0;">
-          <span>Intensitas LUT</span>
-          <input type="range" id="sliderLutIntensity" min="0" max="100" value="85" />
-          <span id="valLutIntensity" style="width:34px;text-align:right;">85%</span>
+          <span>Intensitas Filter</span>
+          <input type="range" id="sliderLutIntensity" min="0" max="100" value="90" />
+          <span id="valLutIntensity" style="width:34px;text-align:right;">90%</span>
         </div>
       </div>
     </div>
 
-    <!-- SHEET 4: AI AUTO CAPTIONS & ADVERCASE TYPOGRAPHY -->
+    <!-- SHEET 4: STACKED PURPLE TEXT LAYER, AUTO CAPTIONS & VOICEOVER -->
     <div class="sheet-backdrop" id="sheetCaptions">
       <div class="bottom-sheet">
         <div class="sheet-header">
-          <span class="sheet-title">AI Auto Captions &amp; Font Studio</span>
+          <span class="sheet-title">Text Layer, Font &amp; Auto Captions</span>
           <button class="sheet-close" data-close="sheetCaptions">Selesai</button>
         </div>
 
         <div class="source-tabs" style="margin-bottom:8px;">
-          <button class="source-tab active" id="btnCapSrcLyrics">Sumber: Lirik Lagu</button>
-          <button class="source-tab" id="btnCapSrcVoice">Sumber: Voiceover</button>
-          <button class="source-tab" id="btnGenerateCaptions" style="background:rgba(16,185,129,0.22);border-color:#10B981;color:#6EE7B7;">Buat Ulang</button>
+          <button class="source-tab" id="btnAddTextLayerSheet" style="background:rgba(124,58,237,0.28);border-color:#C4B5FD;color:#FFFFFF;">+ Layer Teks Baru</button>
+          <button class="source-tab" id="btnGenerateCaptions" style="background:rgba(16,185,129,0.22);border-color:#10B981;color:#6EE7B7;">Auto Captions</button>
+          <button class="source-tab" id="btnRecordVoiceover" style="border-color:rgba(244,63,94,0.5);color:#FDA4AF;">● Rekam Mic</button>
         </div>
 
-        <div style="font-size:11px;font-weight:700;color:var(--text-secondary);margin-bottom:6px;">Pilihan Font (Termasuk ADVERCASE)</div>
+        <div id="voiceoverStatusBar" style="display:none;background:var(--bg-elevated);border:1px solid var(--border-strong);border-radius:10px;padding:8px 10px;margin-bottom:10px;align-items:center;justify-content:space-between;gap:8px;">
+          <span style="font-size:11px;font-weight:700;color:#6EE7B7;" id="voiceoverStatusLabel">Voiceover Aktif (Auto-Ducking)</span>
+          <button class="sub-pill danger" id="btnClearVoiceover">Hapus VO</button>
+        </div>
+
+        <div style="font-size:11px;font-weight:700;color:var(--text-secondary);margin-bottom:5px;">Edit Teks Layer Terpilih (Bisa Digeser Langsung di Preview)</div>
+        <div class="search-row" style="margin-bottom:10px;">
+          <input type="text" class="text-input" id="activeTextLayerInput" placeholder="Ketik teks di sini..." />
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:11px;font-weight:700;color:var(--text-secondary);">Pilihan Font (ADVERCASE, Edits Serif &amp; Kustom)</span>
+          <button class="sub-pill primary" id="btnUploadCustomFont">+ Upload Font (.ttf/.otf)</button>
+        </div>
         <div class="font-grid" id="captionFontGrid"></div>
 
-        <div style="font-size:11px;font-weight:700;color:var(--text-secondary);margin-bottom:6px;">Gaya Sorotan Kata &amp; Posisi</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text-secondary);margin-bottom:6px;">Gaya Teks &amp; Outline</div>
         <div class="option-grid" id="captionStyleGrid" style="grid-template-columns:repeat(4,1fr);"></div>
 
-        <div class="slider-row">
-          <span>Posisi Vertikal</span>
-          <input type="range" id="sliderCaptionY" min="18" max="86" value="72" />
-          <span id="valCaptionY" style="width:34px;text-align:right;">72%</span>
+        <div class="slider-row" style="margin-bottom:0;">
+          <span>Ukuran Teks</span>
+          <input type="range" id="sliderTextSize" min="18" max="64" value="36" />
+          <span id="valTextSize" style="width:34px;text-align:right;">36px</span>
         </div>
-
-        <div style="font-size:11px;font-weight:700;color:var(--text-secondary);margin:8px 0 6px;">Edit Teks Subtitle</div>
-        <div id="captionLinesEditor"></div>
       </div>
     </div>
 
-    <!-- SHEET 5: MEDIA BIN & REORDER -->
-    <div class="sheet-backdrop" id="sheetMedia">
+    <!-- SHEET 5: ADD CLIP / REPLACE VIDEO MODAL -->
+    <div class="sheet-backdrop" id="sheetAddClip">
       <div class="bottom-sheet">
         <div class="sheet-header">
-          <span class="sheet-title">Media Bin &amp; Urutan Klip</span>
-          <button class="sheet-close" data-close="sheetMedia">Tutup</button>
+          <span class="sheet-title">Tambah Klip Video ke Timeline</span>
+          <button class="sheet-close" data-close="sheetAddClip">Tutup</button>
         </div>
-        <div style="display:flex;gap:8px;margin-bottom:10px;">
-          <button class="sub-pill primary" id="btnMediaPickLocal" style="flex:1;justify-content:center;height:34px;">+ Impor Video HP (.mp4)</button>
-          <button class="sub-pill" id="btnMediaAddPreset" style="flex:1;justify-content:center;height:34px;">+ Tambah Klip Aksi</button>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="sub-pill primary" id="btnAddClipFromGallery" style="height:40px;justify-content:center;font-size:12px;">+ Pilih Video dari Galeri HP (.mp4)</button>
+          <button class="sub-pill purple" id="btnAddClipDuplicatePool" style="height:40px;justify-content:center;font-size:12px;">+ Potong Bagian Lain dari Video Saat Ini (Duplikat)</button>
+          <button class="sub-pill" id="btnReplaceActiveClipGallery" style="height:36px;justify-content:center;font-size:11.5px;">Ganti Video pada Klip Terpilih</button>
         </div>
-        <div id="mediaClipOrderList" style="display:flex;flex-direction:column;gap:6px;"></div>
       </div>
     </div>
 
@@ -1526,11 +1702,11 @@
   <script>
     (function () {
       const PX_PER_SEC_BASE = 68;
-      const STORAGE_PROJECTS_KEY = 'beatsync_cut_v22_projects';
-      const STORAGE_ACTIVE_ID_KEY = 'beatsync_cut_v22_active_id';
+      const STORAGE_PROJECTS_KEY = 'beatsync_cut_v24_projects';
+      const STORAGE_ACTIVE_ID_KEY = 'beatsync_cut_v24_active_id';
 
       const ASPECT_RATIOS = ['9:16', '16:9', '4:5', '1:1'];
-      const RESOLUTIONS = ['1080p', '4K 30fps'];
+      const RESOLUTIONS = ['FHD', '4K 30fps'];
 
       const SONG_CATALOG = [
         { id: 's1', title: 'Biarlah (Sped Up Beat)', artist: 'Killing Me Inside', source: 'CapCut', bpm: 142, duration: 204, dropSec: 72.0, freq: 110 },
@@ -1558,28 +1734,28 @@
       ];
 
       const LUT_LIST = [
-        { id: 'NONE', label: 'Natural', filter: 'none' },
-        { id: 'KODAK_PORTRA', label: 'Kodak Portra', filter: 'contrast(1.08) saturate(1.18) sepia(0.14)' },
-        { id: 'CINESTILL_800T', label: 'CineStill 800T', filter: 'contrast(1.14) saturate(1.1) hue-rotate(-8deg)' },
+        { id: 'SOFT_LIGHT', label: 'Soft Light', filter: 'contrast(1.06) brightness(1.05) saturate(1.12)' },
+        { id: 'CINEMATIC', label: 'Cinematic', filter: 'contrast(1.14) saturate(1.18) sepia(0.12)' },
+        { id: 'BOOST_WARM', label: 'Boost Warmth', filter: 'contrast(1.1) saturate(1.24) sepia(0.18)' },
+        { id: 'CINESTILL_800T', label: 'CineStill 800T', filter: 'contrast(1.15) saturate(1.1) hue-rotate(-8deg)' },
         { id: 'TEAL_ORANGE', label: 'Teal & Orange', filter: 'contrast(1.18) saturate(1.25) hue-rotate(-6deg)' },
-        { id: 'BLEACH_BYPASS', label: 'Bleach Bypass', filter: 'contrast(1.32) saturate(0.65)' },
         { id: 'LEICA_MONO', label: 'Leica Mono', filter: 'grayscale(1) contrast(1.28)' }
       ];
 
       const CAPTION_FONTS = [
-        { id: 'ADVERCASE', label: 'ADVERCASE', css: "'Space Grotesk', 'Inter', sans-serif", weight: '900', transform: 'uppercase', tracking: '0.04em' },
-        { id: 'INTER_BLACK', label: 'Inter Black', css: "'Inter', sans-serif", weight: '900', transform: 'none', tracking: '-0.02em' },
-        { id: 'BEBAS_NEUE', label: 'Bebas Neue', css: "'Bebas Neue', sans-serif", weight: '400', transform: 'uppercase', tracking: '0.06em' },
-        { id: 'CINEMA_SERIF', label: 'Cinema Serif', css: "'Playfair Display', serif", weight: '800', transform: 'none', tracking: '0em' },
-        { id: 'SPACE_MONO', label: 'Space Mono', css: "'Space Mono', monospace", weight: '700', transform: 'uppercase', tracking: '0.02em' },
-        { id: 'JAKARTA_SANS', label: 'Jakarta Sans', css: "'Plus Jakarta Sans', sans-serif", weight: '800', transform: 'none', tracking: '-0.01em' }
+        { id: 'EDITS_SERIF', label: 'Edits Outline Serif', css: "'Fraunces', 'Playfair Display', serif", weight: '900', transform: 'none' },
+        { id: 'ADVERCASE', label: 'ADVERCASE', css: "'Space Grotesk', 'Inter', sans-serif", weight: '900', transform: 'uppercase' },
+        { id: 'INTER_BLACK', label: 'Inter Black', css: "'Inter', sans-serif", weight: '900', transform: 'none' },
+        { id: 'BEBAS_NEUE', label: 'Bebas Neue', css: "'Bebas Neue', sans-serif", weight: '400', transform: 'uppercase' },
+        { id: 'SPACE_MONO', label: 'Space Mono', css: "'Space Mono', monospace", weight: '700', transform: 'uppercase' },
+        { id: 'JAKARTA_SANS', label: 'Jakarta Sans', css: "'Plus Jakarta Sans', sans-serif", weight: '800', transform: 'none' }
       ];
 
       const CAPTION_STYLES = [
+        { id: 'EDITS_OUTLINE', label: 'Edits Outline' },
         { id: 'KARAOKE', label: 'Karaoke' },
         { id: 'NEON', label: 'Neon' },
-        { id: 'PILL', label: 'Pill' },
-        { id: 'OUTLINE', label: 'Outline' }
+        { id: 'PILL', label: 'Pill' }
       ];
 
       const TRANSITION_LIST = [
@@ -1595,66 +1771,92 @@
         return Math.max(0.18, Math.min(1, wave));
       });
 
-      function createDefaultProjectState(id = 'proj_default', name = 'BeatSync Cut #1', aspectIdx = 0) {
+      // Pools for live video elements & extracted filmstrip thumbnail dataURLs
+      const videoElementPool = {};
+      const filmstripThumbPool = {};
+
+      function createDefaultProjectState(id = 'proj_default', name = 'New project', aspectIdx = 0) {
         return {
           projectId: id,
           projectName: name,
           aspectIdx,
           resIdx: 0,
-          playheadSec: 1.8,
-          selectedClipId: 'c2',
+          playheadSec: 0.4,
+          selectedType: 'clip', // 'clip' | 'text' | 'lut'
+          selectedId: 'c1',
+          clipAudioMuted: false,
           clips: [
             {
               id: 'c1',
-              name: 'Warmup_Roll.mp4',
-              sourceTotalSec: 10.0,
-              sourceInSec: 1.5,
-              durationSec: 2.2,
-              colorA: '#1D4ED8',
-              colorB: '#0F172A',
+              mediaId: null,
+              name: 'Ride_Intro.mp4',
+              sourceTotalSec: 12.0,
+              sourceInSec: 1.0,
+              durationSec: 2.6,
+              colorA: '#5B3A70',
+              colorB: '#1F2937',
               fx: 'ZOOM_PUNCH',
               velocity: 'NORMAL',
-              transitionOut: 'FLASH',
-              videoEl: null
+              transitionOut: 'FLASH'
             },
             {
               id: 'c2',
+              mediaId: null,
               name: 'BSD_Sprint.mp4',
-              sourceTotalSec: 13.0,
+              sourceTotalSec: 14.0,
               sourceInSec: 3.0,
-              durationSec: 2.0,
+              durationSec: 2.8,
               colorA: '#0057B8',
               colorB: '#1E293B',
-              fx: 'SHAKE_HARD',
+              fx: 'SHAKE_SUBTLE',
               velocity: 'HERO',
-              transitionOut: 'WHIP',
-              videoEl: null
+              transitionOut: 'WHIP'
             },
             {
               id: 'c3',
-              name: 'Corner_Exit.mp4',
-              sourceTotalSec: 9.5,
-              sourceInSec: 2.0,
-              durationSec: 2.2,
-              colorA: '#0284C7',
-              colorB: '#090D16',
-              fx: 'WHITE_FLASH',
-              velocity: 'BULLET',
-              transitionOut: 'NONE',
-              videoEl: null
-            },
-            {
-              id: 'c4',
+              mediaId: null,
               name: 'Finish_Line.mp4',
               sourceTotalSec: 11.0,
-              sourceInSec: 4.0,
-              durationSec: 2.0,
-              colorA: '#2563EB',
-              colorB: '#111827',
+              sourceInSec: 2.0,
+              durationSec: 3.0,
+              colorA: '#0284C7',
+              colorB: '#0F172A',
               fx: 'ZOOM_PUNCH',
               velocity: 'NORMAL',
-              transitionOut: 'NONE',
-              videoEl: null
+              transitionOut: 'NONE'
+            }
+          ],
+          // Stacked Orange Filter / LUT Span Layers (Edits style)
+          lutLayers: [
+            { id: 'lut1', lutId: 'SOFT_LIGHT', label: 'Soft Light', startSec: 0.0, durationSec: 5.4, intensity: 90 },
+            { id: 'lut2', lutId: 'CINEMATIC', label: 'Cinematic', startSec: 0.0, durationSec: 8.4, intensity: 85 },
+            { id: 'lut3', lutId: 'BOOST_WARM', label: 'Boost Warmth', startSec: 2.6, durationSec: 5.8, intensity: 85 }
+          ],
+          // Stacked Purple Text Layers (Edits style, draggable on preview)
+          textLayers: [
+            {
+              id: 'txt1',
+              text: 'Vlog Sepeda\nTerpanjang',
+              startSec: 0.0,
+              durationSec: 4.2,
+              fontId: 'EDITS_SERIF',
+              styleId: 'EDITS_OUTLINE',
+              fontSize: 40,
+              color: '#FFF7D6',
+              xPercent: 50,
+              yPercent: 22
+            },
+            {
+              id: 'txt2',
+              text: 'Yang pernah gw buat',
+              startSec: 0.0,
+              durationSec: 4.2,
+              fontId: 'EDITS_SERIF',
+              styleId: 'EDITS_OUTLINE',
+              fontSize: 22,
+              color: '#FFF7D6',
+              xPercent: 50,
+              yPercent: 32
             }
           ],
           audio: {
@@ -1669,23 +1871,15 @@
             videoVol: 25,
             autoDucking: true,
             waveform: [...BASE_WAVEFORM],
+            detectedBeatsSec: [],
             audioEl: null,
             filterSource: 'All',
             searchQuery: ''
           },
-          lutId: 'KODAK_PORTRA',
-          lutIntensity: 85,
-          captions: {
-            enabled: true,
-            sourceMode: 'lyrics',
-            fontId: 'ADVERCASE',
-            styleId: 'KARAOKE',
-            yPercent: 72,
-            lines: [
-              { id: 'l1', ratioStart: 0.0, ratioEnd: 0.34, text: 'BIARLAH SEMUA BERLALU' },
-              { id: 'l2', ratioStart: 0.34, ratioEnd: 0.68, text: 'PACU KECEPATAN DI SETIAP BEAT' },
-              { id: 'l3', ratioStart: 0.68, ratioEnd: 1.0, text: 'GAS TERUS SAMPAI GARIS AKHIR' }
-            ]
+          voiceover: {
+            audioEl: null,
+            durationSec: 0,
+            label: ''
           }
         };
       }
@@ -1725,6 +1919,135 @@
         }
       }
 
+      function getClipVideoElement(clip) {
+        if (!clip || !clip.mediaId) return null;
+        return videoElementPool[clip.mediaId] || null;
+      }
+
+      /* =========================================================
+         EXTRACT REAL FILMSTRIP THUMBNAILS FROM IMPORTED VIDEO
+         ========================================================= */
+      async function extractFilmstripThumbnails(mediaId, videoEl) {
+        try {
+          const duration = videoEl.duration || 8;
+          const count = 8;
+          const thumbCanvas = document.createElement('canvas');
+          thumbCanvas.width = 72;
+          thumbCanvas.height = 108;
+          const tCtx = thumbCanvas.getContext('2d');
+          const frames = [];
+
+          const cloneVid = document.createElement('video');
+          cloneVid.src = videoEl.src;
+          cloneVid.muted = true;
+          cloneVid.playsInline = true;
+
+          await new Promise(res => {
+            cloneVid.onloadeddata = res;
+            setTimeout(res, 1200);
+          });
+
+          for (let i = 0; i < count; i++) {
+            const seekT = Math.min(duration - 0.1, (i / count) * duration);
+            await new Promise(res => {
+              let done = false;
+              const finish = () => { if (!done) { done = true; res(); } };
+              cloneVid.onseeked = finish;
+              try { cloneVid.currentTime = seekT; } catch (_) { finish(); }
+              setTimeout(finish, 300);
+            });
+            tCtx.drawImage(cloneVid, 0, 0, thumbCanvas.width, thumbCanvas.height);
+            frames.push(thumbCanvas.toDataURL('image/jpeg', 0.65));
+          }
+          filmstripThumbPool[mediaId] = frames;
+          renderTimeline();
+        } catch (_) {}
+      }
+
+      /* =========================================================
+         REAL-TIME BEAT PEAK DETECTOR (Web Audio API)
+         ========================================================= */
+      function analyzeAudioBufferBeats(audioBuffer) {
+        const sr = audioBuffer.sampleRate;
+        const ch0 = audioBuffer.getChannelData(0);
+        const hopSize = Math.floor(sr * 0.02);
+        const energies = [];
+
+        for (let i = 0; i < ch0.length; i += hopSize) {
+          let sumSq = 0;
+          const end = Math.min(ch0.length, i + hopSize);
+          for (let j = i; j < end; j++) sumSq += ch0[j] * ch0[j];
+          energies.push(Math.sqrt(sumSq / Math.max(1, end - i)));
+        }
+
+        const barCount = 84;
+        const framesPerBar = Math.max(1, Math.floor(energies.length / barCount));
+        const waveform = [];
+        let maxBar = 0.01;
+        for (let b = 0; b < barCount; b++) {
+          let peak = 0;
+          for (let k = 0; k < framesPerBar; k++) {
+            const val = energies[b * framesPerBar + k] || 0;
+            if (val > peak) peak = val;
+          }
+          waveform.push(peak);
+          if (peak > maxBar) maxBar = peak;
+        }
+        const normWaveform = waveform.map(v => Math.max(0.16, Math.min(1, v / maxBar)));
+
+        const windowFrames = 25;
+        const rawPeaksSec = [];
+        let lastPeakSec = -1;
+
+        for (let idx = windowFrames; idx < energies.length - 1; idx++) {
+          let localSum = 0;
+          for (let w = idx - windowFrames; w < idx + windowFrames && w < energies.length; w++) {
+            localSum += energies[w];
+          }
+          const localAvg = localSum / (windowFrames * 2);
+          const cur = energies[idx];
+          if (cur > localAvg * 1.48 && cur > energies[idx - 1] && cur >= energies[idx + 1] && cur > 0.03) {
+            const tSec = (idx * hopSize) / sr;
+            if (tSec - lastPeakSec >= 0.28) {
+              rawPeaksSec.push(+tSec.toFixed(3));
+              lastPeakSec = tSec;
+            }
+          }
+        }
+
+        const bpmBins = {};
+        for (let i = 1; i < rawPeaksSec.length; i++) {
+          const dt = rawPeaksSec[i] - rawPeaksSec[i - 1];
+          if (dt >= 0.3 && dt <= 1.0) {
+            let bpm = Math.round(60 / dt);
+            while (bpm < 85) bpm *= 2;
+            while (bpm > 175) bpm = Math.round(bpm / 2);
+            const bucket = Math.round(bpm / 2) * 2;
+            bpmBins[bucket] = (bpmBins[bucket] || 0) + 1;
+          }
+        }
+
+        let detectedBpm = 136;
+        let bestCount = 0;
+        Object.entries(bpmBins).forEach(([b, cnt]) => {
+          if (cnt > bestCount) { bestCount = cnt; detectedBpm = +b; }
+        });
+
+        const dropWindowFrames = Math.floor(8.0 / 0.02);
+        let bestEnergySum = 0;
+        let bestDropSec = 0;
+        for (let i = 0; i + dropWindowFrames < energies.length; i += 10) {
+          let s = 0;
+          for (let k = 0; k < dropWindowFrames; k++) s += energies[i + k];
+          if (s > bestEnergySum) {
+            bestEnergySum = s;
+            bestDropSec = +((i * hopSize) / sr).toFixed(1);
+          }
+        }
+
+        return { bpm: detectedBpm, waveform: normWaveform, detectedBeatsSec: rawPeaksSec, dropSec: bestDropSec };
+      }
+
       /* =========================================================
          PROJECT HISTORY & AUTO-SAVE ENGINE (localStorage)
          ========================================================= */
@@ -1753,19 +2076,12 @@
           aspectIdx: state.aspectIdx,
           resIdx: state.resIdx,
           playheadSec: state.playheadSec,
-          selectedClipId: state.selectedClipId,
-          clips: state.clips.map(c => ({
-            id: c.id,
-            name: c.name,
-            sourceTotalSec: c.sourceTotalSec,
-            sourceInSec: c.sourceInSec,
-            durationSec: c.durationSec,
-            colorA: c.colorA,
-            colorB: c.colorB,
-            fx: c.fx,
-            velocity: c.velocity,
-            transitionOut: c.transitionOut
-          })),
+          selectedType: state.selectedType,
+          selectedId: state.selectedId,
+          clipAudioMuted: state.clipAudioMuted,
+          clips: state.clips.map(c => ({ ...c })),
+          lutLayers: state.lutLayers.map(l => ({ ...l })),
+          textLayers: state.textLayers.map(t => ({ ...t })),
           audio: {
             songId: state.audio.songId,
             title: state.audio.title,
@@ -1777,11 +2093,9 @@
             musicVol: state.audio.musicVol,
             videoVol: state.audio.videoVol,
             autoDucking: state.audio.autoDucking,
-            waveform: state.audio.waveform
-          },
-          lutId: state.lutId,
-          lutIntensity: state.lutIntensity,
-          captions: JSON.parse(JSON.stringify(state.captions))
+            waveform: state.audio.waveform,
+            detectedBeatsSec: state.audio.detectedBeatsSec || []
+          }
         };
       }
 
@@ -1792,7 +2106,7 @@
         const list = loadProjectListFromStorage();
         const entry = {
           id: state.projectId,
-          name: state.projectName || 'Tanpa Judul',
+          name: state.projectName || 'New project',
           updatedAt: Date.now(),
           aspectRatio: ASPECT_RATIOS[state.aspectIdx],
           resolution: RESOLUTIONS[state.resIdx],
@@ -1800,26 +2114,19 @@
           clipCount: state.clips.length,
           songTitle: state.audio.title,
           bpm: state.audio.bpm,
-          fontId: state.captions.fontId,
-          lutId: state.lutId,
           payload: serializeCurrentProjectPayload()
         };
 
         const idx = list.findIndex(p => p.id === state.projectId);
-        if (idx >= 0) {
-          list[idx] = entry;
-        } else {
-          list.unshift(entry);
-        }
+        if (idx >= 0) list[idx] = entry;
+        else list.unshift(entry);
         if (list.length > 25) list.length = 25;
         saveProjectListToStorage(list);
 
         document.getElementById('headerProjectName').textContent = state.projectName;
         if (badge) {
           const now = new Date();
-          const hh = String(now.getHours()).padStart(2, '0');
-          const mm = String(now.getMinutes()).padStart(2, '0');
-          badge.textContent = `● Tersimpan ${hh}:${mm}`;
+          badge.textContent = `● Tersimpan ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
         }
         if (!silent) showToast(`Draf "${state.projectName}" tersimpan`);
       }
@@ -1837,12 +2144,13 @@
         state.resIdx = typeof p.resIdx === 'number' ? p.resIdx : 0;
         document.getElementById('btnResolution').textContent = RESOLUTIONS[state.resIdx];
 
-        state.clips = (p.clips || []).map(c => ({ ...c, videoEl: null }));
-        state.selectedClipId = p.selectedClipId || (state.clips[0] && state.clips[0].id);
+        state.clips = (p.clips || []).map(c => ({ ...c }));
+        state.lutLayers = (p.lutLayers || []).map(l => ({ ...l }));
+        state.textLayers = (p.textLayers || []).map(t => ({ ...t }));
+        state.selectedType = p.selectedType || 'clip';
+        state.selectedId = p.selectedId || (state.clips[0] && state.clips[0].id);
+        state.clipAudioMuted = !!p.clipAudioMuted;
         Object.assign(state.audio, p.audio || {}, { audioEl: null, filterSource: 'All', searchQuery: '' });
-        state.lutId = p.lutId || 'KODAK_PORTRA';
-        state.lutIntensity = typeof p.lutIntensity === 'number' ? p.lutIntensity : 85;
-        state.captions = p.captions || createDefaultProjectState().captions;
         state.playheadSec = Math.min(p.playheadSec || 0, getTotalDuration());
         state.undoStack = [];
         state.redoStack = [];
@@ -1870,11 +2178,7 @@
       function blobToBase64(blob) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
-          reader.onloadend = () => {
-            const res = reader.result || '';
-            const base64 = String(res).split(',')[1] || '';
-            resolve(base64);
-          };
+          reader.onloadend = () => resolve(String(reader.result || '').split(',')[1] || '');
           reader.onerror = reject;
           reader.readAsDataURL(blob);
         });
@@ -1886,45 +2190,21 @@
         const isNative = cap && typeof cap.isNativePlatform === 'function' ? cap.isNativePlatform() : !!fs;
 
         if (isNative && fs && typeof fs.writeFile === 'function') {
-          try {
-            if (typeof fs.requestPermissions === 'function') {
-              await fs.requestPermissions();
-            }
-          } catch (_) {}
-
+          try { if (typeof fs.requestPermissions === 'function') await fs.requestPermissions(); } catch (_) {}
           const base64Data = await blobToBase64(blob);
           const targets = [
-            {
-              directory: 'EXTERNAL_STORAGE',
-              path: `Download/BeatSync-Cut/${filename}`,
-              label: `Penyimpanan Internal/Download/BeatSync-Cut/${filename}`
-            },
-            {
-              directory: 'DOCUMENTS',
-              path: `BeatSync-Cut/${filename}`,
-              label: `Penyimpanan Internal/Documents/BeatSync-Cut/${filename}`
-            },
-            {
-              directory: 'DATA',
-              path: filename,
-              label: `Folder Aplikasi/${filename}`
-            }
+            { directory: 'EXTERNAL_STORAGE', path: `Download/BeatSync-Cut/${filename}`, label: `Penyimpanan Internal/Download/BeatSync-Cut/${filename}` },
+            { directory: 'DOCUMENTS', path: `BeatSync-Cut/${filename}`, label: `Penyimpanan Internal/Documents/BeatSync-Cut/${filename}` },
+            { directory: 'DATA', path: filename, label: `Folder Aplikasi/${filename}` }
           ];
-
           for (const target of targets) {
             try {
-              await fs.writeFile({
-                path: target.path,
-                data: base64Data,
-                directory: target.directory,
-                recursive: true
-              });
+              await fs.writeFile({ path: target.path, data: base64Data, directory: target.directory, recursive: true });
               return { native: true, location: target.label };
             } catch (_) {}
           }
         }
 
-        // Browser / WebView fallback download
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -1937,7 +2217,7 @@
       }
 
       /* =========================================================
-         ASPECT RATIO & CANVAS ENGINE
+         HELPERS & SELECTION STATE
          ========================================================= */
       function setAspectRatioByIndex(idx, skipSave = false) {
         state.aspectIdx = idx % ASPECT_RATIOS.length;
@@ -1972,12 +2252,32 @@
         if (!skipSave) scheduleAutoSave();
       }
 
+      function setTimelineZoom(newZoom) {
+        state.zoom = Math.max(0.5, Math.min(3.0, +newZoom.toFixed(2)));
+        document.getElementById('zoomLevelText').textContent = `${state.zoom.toFixed(1)}x`;
+        renderTimeline();
+      }
+
       function getTotalDuration() {
         return Math.max(0.5, state.clips.reduce((acc, c) => acc + c.durationSec, 0));
       }
 
       function getBeatIntervalSec() {
         return 60 / state.audio.bpm;
+      }
+
+      function getBeatTimestampsInTimeline() {
+        const total = getTotalDuration();
+        const detected = state.audio.detectedBeatsSec || [];
+        if (detected.length > 0) {
+          const offset = state.audio.startOffsetSec;
+          const mapped = detected.map(t => t - offset).filter(t => t >= 0 && t <= total);
+          if (mapped.length >= 2) return mapped;
+        }
+        const step = getBeatIntervalSec();
+        const fallback = [];
+        for (let t = 0; t <= total + 0.001; t += step) fallback.push(+t.toFixed(3));
+        return fallback;
       }
 
       function formatTime(sec) {
@@ -2001,18 +2301,13 @@
 
       function restoreSnapshot(snapStr) {
         const data = JSON.parse(snapStr);
-        const mediaMap = {};
-        state.clips.forEach(c => { mediaMap[c.id] = c.videoEl; });
-
-        state.clips = data.clips.map(c => ({
-          ...c,
-          videoEl: mediaMap[c.id] || null
-        }));
-        state.selectedClipId = data.selectedClipId;
+        state.clips = data.clips.map(c => ({ ...c }));
+        state.lutLayers = (data.lutLayers || []).map(l => ({ ...l }));
+        state.textLayers = (data.textLayers || []).map(t => ({ ...t }));
+        state.selectedType = data.selectedType || 'clip';
+        state.selectedId = data.selectedId;
+        state.clipAudioMuted = !!data.clipAudioMuted;
         Object.assign(state.audio, data.audio);
-        state.lutId = data.lutId;
-        state.lutIntensity = data.lutIntensity;
-        state.captions = data.captions;
         state.playheadSec = Math.min(state.playheadSec, getTotalDuration());
         scheduleAutoSave();
         renderAll();
@@ -2028,24 +2323,49 @@
       }
 
       function getSelectedClip() {
-        return state.clips.find(c => c.id === state.selectedClipId) || state.clips[0];
+        if (state.selectedType === 'clip') {
+          return state.clips.find(c => c.id === state.selectedId) || state.clips[0];
+        }
+        return state.clips[0];
+      }
+
+      function getSelectedTextLayer() {
+        if (state.selectedType === 'text') {
+          return state.textLayers.find(t => t.id === state.selectedId) || state.textLayers[0];
+        }
+        return state.textLayers[0];
+      }
+
+      function getSelectedLutLayer() {
+        if (state.selectedType === 'lut') {
+          return state.lutLayers.find(l => l.id === state.selectedId) || state.lutLayers[0];
+        }
+        return state.lutLayers[0];
       }
 
       function updateSubBar() {
-        const clip = getSelectedClip();
         const readout = document.getElementById('spanReadoutText');
-        if (!clip) {
-          readout.textContent = 'Tidak ada klip';
-          return;
+        if (state.selectedType === 'text') {
+          const tl = getSelectedTextLayer();
+          readout.textContent = tl
+            ? `Teks: "${tl.text.replace(/\n/g, ' ')}" (${tl.startSec.toFixed(1)}d–${(tl.startSec + tl.durationSec).toFixed(1)}d)`
+            : 'Layer Teks';
+        } else if (state.selectedType === 'lut') {
+          const ll = getSelectedLutLayer();
+          readout.textContent = ll
+            ? `Filter: ${ll.label} (${ll.startSec.toFixed(1)}d–${(ll.startSec + ll.durationSec).toFixed(1)}d)`
+            : 'Layer Filter';
+        } else {
+          const clip = getSelectedClip();
+          if (!clip) { readout.textContent = 'Tidak ada klip'; return; }
+          const outSec = Math.min(clip.sourceTotalSec, clip.sourceInSec + clip.durationSec);
+          readout.textContent = `${clip.sourceInSec.toFixed(1)}d–${outSec.toFixed(1)}d / ${clip.sourceTotalSec.toFixed(1)}d`;
         }
-        const outSec = Math.min(clip.sourceTotalSec, clip.sourceInSec + clip.durationSec);
-        readout.textContent = `Potongan: ${clip.sourceInSec.toFixed(1)}d – ${outSec.toFixed(1)}d / ${clip.sourceTotalSec.toFixed(1)}d`;
       }
 
       function updateTimecode() {
-        const total = getTotalDuration();
-        document.getElementById('timecodeText').innerHTML =
-          `${formatTime(state.playheadSec)} <span>/ ${formatTime(total)}</span>`;
+        document.getElementById('timecodeMain').textContent = formatTime(state.playheadSec);
+        document.getElementById('timecodeSub').textContent = formatTime(getTotalDuration());
       }
 
       function drawRoundedRect(context, x, y, w, h, r) {
@@ -2059,84 +2379,58 @@
         context.closePath();
       }
 
-      function renderPreviewFrame(overrideClip = null, overrideSourceSec = null) {
-        const w = previewCanvas.width;
-        const h = previewCanvas.height;
-        const totalDur = getTotalDuration();
-        const t = Math.max(0, Math.min(totalDur, state.playheadSec));
+      /* =========================================================
+         PREVIEW CANVAS RENDERER (STACKED LUTS + MULTI-TEXT + TRANSITIONS)
+         ========================================================= */
+      function getActiveCombinedFilterAt(t) {
+        const activeLuts = state.lutLayers.filter(l => t >= l.startSec && t <= l.startSec + l.durationSec + 0.001);
+        if (activeLuts.length === 0) return 'none';
+        const filters = activeLuts.map(layer => {
+          const spec = LUT_LIST.find(x => x.id === layer.lutId);
+          return spec ? spec.filter : 'none';
+        }).filter(f => f !== 'none');
+        return filters.length > 0 ? filters.join(' ') : 'none';
+      }
 
-        let accum = 0;
-        let activeClip = state.clips[0];
-        let localSec = 0;
-        for (const c of state.clips) {
-          if (t >= accum && t <= accum + c.durationSec + 0.0001) {
-            activeClip = c;
-            localSec = Math.max(0, t - accum);
-            break;
-          }
-          accum += c.durationSec;
-        }
-
-        if (overrideClip) {
-          activeClip = overrideClip;
-          localSec = 0;
-        }
-
+      function drawSingleClipVisual(clip, localSec, overrideSourceSec, w, h, extraTx = 0, extraAlpha = 1.0, activeFilterStr = 'none') {
         ctx.save();
-        ctx.clearRect(0, 0, w, h);
-
-        if (!activeClip) {
-          ctx.fillStyle = '#0A0A0D';
-          ctx.fillRect(0, 0, w, h);
-          ctx.restore();
-          return;
-        }
-
-        const lutObj = LUT_LIST.find(l => l.id === state.lutId);
-        if (lutObj && lutObj.filter !== 'none' && state.lutIntensity > 0) {
-          ctx.filter = lutObj.filter;
-        } else {
-          ctx.filter = 'none';
-        }
+        ctx.globalAlpha = extraAlpha;
+        ctx.filter = activeFilterStr;
 
         let scale = 1.0;
-        let tx = 0;
+        let tx = extraTx;
         let ty = 0;
         const decay = Math.exp(-localSec * 8.0);
-        if (activeClip.fx === 'ZOOM_PUNCH') {
+        if (clip.fx === 'ZOOM_PUNCH') {
           scale = 1.0 + 0.14 * decay;
-        } else if (activeClip.fx === 'SHAKE_SUBTLE') {
+        } else if (clip.fx === 'SHAKE_SUBTLE') {
           scale = 1.0 + 0.05 * decay;
-          tx = Math.sin(localSec * 55) * 12 * decay;
-          ty = Math.cos(localSec * 44) * 9 * decay;
-        } else if (activeClip.fx === 'SHAKE_HARD') {
+          tx += Math.sin(localSec * 55) * 12 * decay;
+          ty += Math.cos(localSec * 44) * 9 * decay;
+        } else if (clip.fx === 'SHAKE_HARD') {
           scale = 1.0 + 0.11 * decay;
-          tx = Math.sin(localSec * 75) * 24 * decay;
-          ty = Math.cos(localSec * 62) * 18 * decay;
-        } else if (activeClip.fx === 'WHIP_BLUR') {
+          tx += Math.sin(localSec * 75) * 24 * decay;
+          ty += Math.cos(localSec * 62) * 18 * decay;
+        } else if (clip.fx === 'WHIP_BLUR') {
           scale = 1.0 + 0.16 * decay;
-          tx = -80 * decay;
+          tx += -80 * decay;
         }
 
         let speedMult = 1.0;
-        if (activeClip.velocity === 'HERO') {
-          speedMult = localSec < 0.35 ? 1.8 : 0.65;
-        } else if (activeClip.velocity === 'BULLET') {
-          speedMult = localSec < 0.25 ? 2.2 : 0.55;
-        } else if (activeClip.velocity === 'FLASH_IN') {
-          speedMult = 1.4;
-        }
+        if (clip.velocity === 'HERO') speedMult = localSec < 0.35 ? 1.8 : 0.65;
+        else if (clip.velocity === 'BULLET') speedMult = localSec < 0.25 ? 2.2 : 0.55;
+        else if (clip.velocity === 'FLASH_IN') speedMult = 1.4;
 
         const sourceTime = overrideSourceSec !== null
           ? overrideSourceSec
-          : Math.min(activeClip.sourceTotalSec, activeClip.sourceInSec + localSec * speedMult);
+          : Math.min(clip.sourceTotalSec, clip.sourceInSec + localSec * speedMult);
 
         ctx.translate(w / 2 + tx, h / 2 + ty);
         ctx.scale(scale, scale);
         ctx.translate(-w / 2, -h / 2);
 
-        if (activeClip.videoEl && activeClip.videoEl.readyState >= 2) {
-          const v = activeClip.videoEl;
+        const v = getClipVideoElement(clip);
+        if (v && v.readyState >= 2) {
           if (Math.abs(v.currentTime - sourceTime) > 0.08 && !state.isPlaying) {
             try { v.currentTime = Math.min(v.duration || sourceTime, sourceTime); } catch (_) {}
           }
@@ -2148,20 +2442,20 @@
           ctx.drawImage(v, (w - dw) / 2, (h - dh) / 2, dw, dh);
         } else {
           const grad = ctx.createLinearGradient(0, 0, w, h);
-          grad.addColorStop(0, activeClip.colorA);
-          grad.addColorStop(1, activeClip.colorB);
+          grad.addColorStop(0, clip.colorA);
+          grad.addColorStop(1, clip.colorB);
           ctx.fillStyle = grad;
           ctx.fillRect(0, 0, w, h);
 
           ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
           ctx.lineWidth = 3;
-          const horizonY = h * 0.44;
+          const horizonY = h * 0.48;
           ctx.beginPath();
           ctx.moveTo(0, horizonY);
           ctx.lineTo(w, horizonY);
           ctx.stroke();
 
-          ctx.fillStyle = 'rgba(10, 12, 18, 0.55)';
+          ctx.fillStyle = 'rgba(10, 12, 18, 0.52)';
           ctx.beginPath();
           ctx.moveTo(w * 0.38, horizonY);
           ctx.lineTo(w * 0.62, horizonY);
@@ -2180,165 +2474,358 @@
             ctx.fillRect(w / 2 - dashW / 2, y, dashW, dashH);
           }
 
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.88)';
-          ctx.font = '800 22px "Plus Jakarta Sans", sans-serif';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+          ctx.font = '800 20px "Plus Jakarta Sans", sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText(activeClip.name, w / 2, h * 0.28);
+          ctx.fillText(clip.name, w / 2, h * 0.56);
 
           ctx.fillStyle = 'rgba(147, 197, 253, 0.95)';
-          ctx.font = '700 15px "Space Mono", monospace';
-          ctx.fillText(`FRAME ${sourceTime.toFixed(1)}d / ${activeClip.sourceTotalSec.toFixed(1)}d • ${ASPECT_RATIOS[state.aspectIdx]}`, w / 2, h * 0.35);
+          ctx.font = '700 14px "Space Mono", monospace';
+          ctx.fillText(`FRAME ${sourceTime.toFixed(1)}d / ${clip.sourceTotalSec.toFixed(1)}d`, w / 2, h * 0.62);
         }
 
-        if (activeClip.fx === 'WHITE_FLASH' && localSec < 0.18) {
+        if (clip.fx === 'WHITE_FLASH' && localSec < 0.18) {
           const alpha = (1 - localSec / 0.18) * 0.75;
           ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
           ctx.fillRect(0, 0, w, h);
         }
 
         ctx.restore();
+      }
 
-        if (state.captions.enabled && state.captions.lines.length > 0) {
-          const normT = totalDur > 0 ? t / totalDur : 0;
-          const activeLine = state.captions.lines.find(l => normT >= l.ratioStart && normT <= l.ratioEnd + 0.001)
-            || state.captions.lines[state.captions.lines.length - 1];
+      // Store bounding boxes of rendered text layers for direct touch-dragging on preview
+      let renderedTextHitBoxes = [];
 
-          if (activeLine && activeLine.text.trim()) {
-            const fontSpec = CAPTION_FONTS.find(f => f.id === state.captions.fontId) || CAPTION_FONTS[0];
-            const rawText = fontSpec.transform === 'uppercase' ? activeLine.text.toUpperCase() : activeLine.text;
-            const words = rawText.split(/\s+/).filter(Boolean);
-            const lineProgress = Math.max(0, Math.min(0.999,
-              (normT - activeLine.ratioStart) / Math.max(0.01, activeLine.ratioEnd - activeLine.ratioStart)
-            ));
-            const activeWordIdx = Math.floor(lineProgress * words.length);
+      function renderPreviewFrame(overrideClip = null, overrideSourceSec = null, isExportPass = false) {
+        const w = previewCanvas.width;
+        const h = previewCanvas.height;
+        const totalDur = getTotalDuration();
+        const t = Math.max(0, Math.min(totalDur, state.playheadSec));
+        const activeFilterStr = getActiveCombinedFilterAt(t);
 
-            let fontSize = state.captions.fontId === 'BEBAS_NEUE' ? 42 : 31;
-            ctx.save();
-            ctx.font = `${fontSpec.weight} ${fontSize}px ${fontSpec.css}`;
-            ctx.textBaseline = 'middle';
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = '#0A0A0D';
+        ctx.fillRect(0, 0, w, h);
 
-            let spaceW = ctx.measureText(' ').width * 1.15;
-            let wordWidths = words.map(word => ctx.measureText(word).width);
-            let totalTextW = wordWidths.reduce((a, b) => a + b, 0) + spaceW * Math.max(0, words.length - 1);
-            const maxAllowedW = w * 0.88;
-            if (totalTextW > maxAllowedW) {
-              const fitRatio = maxAllowedW / totalTextW;
-              fontSize = Math.max(16, Math.floor(fontSize * fitRatio));
-              ctx.font = `${fontSpec.weight} ${fontSize}px ${fontSpec.css}`;
-              spaceW = ctx.measureText(' ').width * 1.15;
-              wordWidths = words.map(word => ctx.measureText(word).width);
-              totalTextW = wordWidths.reduce((a, b) => a + b, 0) + spaceW * Math.max(0, words.length - 1);
+        if (overrideClip) {
+          drawSingleClipVisual(overrideClip, 0, overrideSourceSec, w, h, 0, 1.0, activeFilterStr);
+        } else {
+          let accum = 0;
+          let activeIdx = 0;
+          let localSec = 0;
+          for (let i = 0; i < state.clips.length; i++) {
+            const c = state.clips[i];
+            if (t >= accum && t <= accum + c.durationSec + 0.0001) {
+              activeIdx = i;
+              localSec = Math.max(0, t - accum);
+              break;
             }
+            accum += c.durationSec;
+          }
 
-            const centerY = (state.captions.yPercent / 100) * h;
+          const activeClip = state.clips[activeIdx];
+          if (!activeClip) return;
 
-            if (state.captions.styleId === 'PILL') {
-              ctx.fillStyle = 'rgba(10, 10, 13, 0.82)';
-              drawRoundedRect(ctx, w / 2 - totalTextW / 2 - 18, centerY - fontSize * 0.78, totalTextW + 36, fontSize * 1.56, 14);
+          const transDur = 0.24;
+          const prevClip = activeIdx > 0 ? state.clips[activeIdx - 1] : null;
+          const incomingTrans = prevClip ? prevClip.transitionOut : 'NONE';
+          const outgoingTrans = activeClip.transitionOut || 'NONE';
+          const nextClip = activeIdx < state.clips.length - 1 ? state.clips[activeIdx + 1] : null;
+          const remainingInClip = activeClip.durationSec - localSec;
+
+          if (incomingTrans && incomingTrans !== 'NONE' && localSec < transDur && prevClip) {
+            const p = localSec / transDur;
+            if (incomingTrans === 'DISSOLVE') {
+              drawSingleClipVisual(prevClip, prevClip.durationSec - 0.05, null, w, h, 0, 1 - p, activeFilterStr);
+              drawSingleClipVisual(activeClip, localSec, null, w, h, 0, p, activeFilterStr);
+            } else if (incomingTrans === 'WHIP') {
+              drawSingleClipVisual(prevClip, prevClip.durationSec - 0.05, null, w, h, -w * p, 1, activeFilterStr);
+              drawSingleClipVisual(activeClip, localSec, null, w, h, w * (1 - p), 1, activeFilterStr);
+            } else if (incomingTrans === 'FLASH') {
+              drawSingleClipVisual(activeClip, localSec, null, w, h, 0, 1, activeFilterStr);
+              ctx.fillStyle = `rgba(255, 255, 255, ${(1 - p) * 0.92})`;
+              ctx.fillRect(0, 0, w, h);
+            } else if (incomingTrans === 'GLITCH') {
+              const jitter = Math.sin(p * 42) * 26 * (1 - p);
+              drawSingleClipVisual(activeClip, localSec, null, w, h, jitter, 1, activeFilterStr);
+              ctx.fillStyle = `rgba(34, 211, 238, ${(1 - p) * 0.26})`;
+              ctx.fillRect(jitter, h * 0.2, w, h * 0.16);
+              ctx.fillStyle = `rgba(244, 63, 94, ${(1 - p) * 0.26})`;
+              ctx.fillRect(-jitter, h * 0.62, w, h * 0.18);
+            } else {
+              drawSingleClipVisual(activeClip, localSec, null, w, h, 0, 1, activeFilterStr);
+            }
+          } else if (outgoingTrans && outgoingTrans !== 'NONE' && remainingInClip < transDur && nextClip) {
+            const p = 1 - remainingInClip / transDur;
+            if (outgoingTrans === 'FLASH') {
+              drawSingleClipVisual(activeClip, localSec, null, w, h, 0, 1, activeFilterStr);
+              ctx.fillStyle = `rgba(255, 255, 255, ${p * 0.85})`;
+              ctx.fillRect(0, 0, w, h);
+            } else {
+              drawSingleClipVisual(activeClip, localSec, null, w, h, 0, 1, activeFilterStr);
+            }
+          } else {
+            drawSingleClipVisual(activeClip, localSec, null, w, h, 0, 1, activeFilterStr);
+          }
+        }
+
+        // Render all active Stacked Purple Text Layers at current playhead
+        renderedTextHitBoxes = [];
+        const activeTexts = state.textLayers.filter(tl => t >= tl.startSec && t <= tl.startSec + tl.durationSec + 0.001);
+
+        activeTexts.forEach(tl => {
+          if (!tl.text || !tl.text.trim()) return;
+          const fontSpec = CAPTION_FONTS.find(f => f.id === tl.fontId) || CAPTION_FONTS[0];
+          const rawText = fontSpec.transform === 'uppercase' ? tl.text.toUpperCase() : tl.text;
+          const lines = rawText.split('\n');
+          const baseSize = tl.fontSize || 36;
+          const lineHeight = baseSize * 1.12;
+
+          ctx.save();
+          ctx.font = `${fontSpec.weight} ${baseSize}px ${fontSpec.css}`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+
+          const cx = (tl.xPercent / 100) * w;
+          const cy = (tl.yPercent / 100) * h;
+
+          let maxLineW = 0;
+          lines.forEach(line => {
+            const lw = ctx.measureText(line).width;
+            if (lw > maxLineW) maxLineW = lw;
+          });
+
+          const totalH = lines.length * lineHeight;
+          const startY = cy - totalH / 2 + lineHeight / 2;
+
+          if (tl.styleId === 'PILL') {
+            ctx.fillStyle = 'rgba(10, 10, 13, 0.82)';
+            drawRoundedRect(ctx, cx - maxLineW / 2 - 18, cy - totalH / 2 - 10, maxLineW + 36, totalH + 20, 14);
+            ctx.fill();
+          }
+
+          lines.forEach((line, idx) => {
+            const ly = startY + idx * lineHeight;
+            if (tl.styleId === 'KARAOKE') {
+              const lw = ctx.measureText(line).width;
+              ctx.fillStyle = '#0057B8';
+              drawRoundedRect(ctx, cx - lw / 2 - 10, ly - baseSize * 0.56, lw + 20, baseSize * 1.12, 9);
               ctx.fill();
             }
 
-            let curX = w / 2 - totalTextW / 2;
-            words.forEach((word, idx) => {
-              const ww = wordWidths[idx];
-              const isHighlighted = idx === activeWordIdx;
+            if (tl.styleId === 'NEON') {
+              ctx.shadowColor = '#38BDF8';
+              ctx.shadowBlur = 18;
+            } else {
+              ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+              ctx.shadowBlur = 6;
+              ctx.shadowOffsetY = 3;
+            }
 
-              if (state.captions.styleId === 'KARAOKE' && isHighlighted) {
-                ctx.fillStyle = '#0057B8';
-                drawRoundedRect(ctx, curX - 8, centerY - fontSize * 0.68, ww + 16, fontSize * 1.36, 9);
-                ctx.fill();
-              }
+            if (tl.styleId === 'EDITS_OUTLINE' || !tl.styleId) {
+              ctx.lineJoin = 'round';
+              ctx.strokeStyle = '#141210';
+              ctx.lineWidth = Math.max(5, Math.round(baseSize * 0.18));
+              ctx.strokeText(line, cx, ly);
+            }
 
-              if (state.captions.styleId === 'NEON' && isHighlighted) {
-                ctx.shadowColor = '#38BDF8';
-                ctx.shadowBlur = 18;
-              } else {
-                ctx.shadowColor = 'rgba(0,0,0,0.85)';
-                ctx.shadowBlur = 8;
-              }
+            ctx.fillStyle = tl.color || '#FFF7D6';
+            ctx.fillText(line, cx, ly);
+          });
 
-              if (state.captions.styleId === 'OUTLINE') {
-                ctx.strokeStyle = '#000000';
-                ctx.lineWidth = 6;
-                ctx.strokeText(word, curX, centerY);
-              }
+          // Draw subtle selection box when selected on preview stage (not during export)
+          const boxW = maxLineW + 28;
+          const boxH = totalH + 18;
+          const boxX = cx - boxW / 2;
+          const boxY = cy - boxH / 2;
 
-              ctx.fillStyle = isHighlighted ? '#FFFFFF' : (state.captions.styleId === 'PILL' ? '#E2E8F0' : '#F8FAFC');
-              ctx.fillText(word, curX, centerY);
-              curX += ww + spaceW;
-            });
+          renderedTextHitBoxes.push({ id: tl.id, x: boxX, y: boxY, w: boxW, h: boxH });
 
-            ctx.restore();
+          if (!isExportPass && state.selectedType === 'text' && state.selectedId === tl.id) {
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.strokeStyle = 'rgba(196, 181, 253, 0.9)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([6, 4]);
+            drawRoundedRect(ctx, boxX, boxY, boxW, boxH, 10);
+            ctx.stroke();
           }
-        }
+
+          ctx.restore();
+        });
       }
 
       /* =========================================================
-         TIMELINE RENDERING & SPAN INTERACTION
+         DIRECT TOUCH-DRAG TEXT ON PREVIEW CANVAS
          ========================================================= */
+      let draggingTextId = null;
+      let dragTextStartClient = { x: 0, y: 0 };
+      let dragTextStartPct = { x: 50, y: 50 };
+
+      canvasFrame.addEventListener('pointerdown', (e) => {
+        const rect = previewCanvas.getBoundingClientRect();
+        const scaleX = previewCanvas.width / rect.width;
+        const scaleY = previewCanvas.height / rect.height;
+        const cx = (e.clientX - rect.left) * scaleX;
+        const cy = (e.clientY - rect.top) * scaleY;
+
+        for (let i = renderedTextHitBoxes.length - 1; i >= 0; i--) {
+          const box = renderedTextHitBoxes[i];
+          if (cx >= box.x && cx <= box.x + box.w && cy >= box.y && cy <= box.y + box.h) {
+            e.stopPropagation();
+            const tl = state.textLayers.find(t => t.id === box.id);
+            if (!tl) return;
+            state.selectedType = 'text';
+            state.selectedId = tl.id;
+            draggingTextId = tl.id;
+            dragTextStartClient = { x: e.clientX, y: e.clientY };
+            dragTextStartPct = { x: tl.xPercent, y: tl.yPercent };
+            pushHistory(`Geser Teks "${tl.text.split('\n')[0]}"`);
+            updateSubBar();
+            renderTimeline();
+            renderPreviewFrame();
+            return;
+          }
+        }
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!draggingTextId) return;
+        const tl = state.textLayers.find(t => t.id === draggingTextId);
+        if (!tl) return;
+        const rect = previewCanvas.getBoundingClientRect();
+        const dxPct = ((e.clientX - dragTextStartClient.x) / rect.width) * 100;
+        const dyPct = ((e.clientY - dragTextStartClient.y) / rect.height) * 100;
+        tl.xPercent = Math.max(8, Math.min(92, +(dragTextStartPct.x + dxPct).toFixed(1)));
+        tl.yPercent = Math.max(8, Math.min(92, +(dragTextStartPct.y + dyPct).toFixed(1)));
+        renderPreviewFrame();
+      });
+
+      window.addEventListener('pointerup', () => {
+        if (draggingTextId) {
+          draggingTextId = null;
+          scheduleAutoSave();
+        }
+      });
+
+      /* =========================================================
+         MULTI-LAYER STACKED TIMELINE RENDERER (EDITS + CAPCUT)
+         ========================================================= */
+      function buildFilmstripThumbsHtml(clip, widthPx) {
+        const thumbCount = Math.max(2, Math.ceil(widthPx / 34));
+        const realFrames = clip.mediaId ? filmstripThumbPool[clip.mediaId] : null;
+        let cells = '';
+        for (let i = 0; i < thumbCount; i++) {
+          if (realFrames && realFrames.length > 0) {
+            const frameUrl = realFrames[i % realFrames.length];
+            cells += `<div class="filmstrip-thumb-cell" style="background-image:url('${frameUrl}');"></div>`;
+          } else {
+            const shade = i % 2 === 0 ? 1 : 0.85;
+            cells += `<div class="filmstrip-thumb-cell" style="background:linear-gradient(160deg, ${clip.colorA}, ${clip.colorB});filter:brightness(${shade});"></div>`;
+          }
+        }
+        return cells;
+      }
+
       function renderTimeline() {
         const pxPerSec = PX_PER_SEC_BASE * state.zoom;
         const totalDur = getTotalDuration();
         const totalWidthPx = Math.max(240, totalDur * pxPerSec);
-        const beatStep = getBeatIntervalSec();
+        const beatMarkers = getBeatTimestampsInTimeline();
+        const hasDetectedBeats = (state.audio.detectedBeatsSec || []).length > 0;
 
-        timelineContent.style.width = `${totalWidthPx}px`;
+        timelineContent.style.width = `${totalWidthPx + 64}px`;
         timelineContent.style.transform = `translateX(${-state.playheadSec * pxPerSec}px)`;
 
+        // 1. Time Ruler with dots (CapCut / Edits style)
         let html = `<div class="beat-ruler" style="width:${totalWidthPx}px;">`;
         const stepSec = state.zoom >= 1.5 ? 0.5 : 1.0;
         for (let t = 0; t <= totalDur + 0.05; t += stepSec) {
           const left = t * pxPerSec;
           const isMajor = Math.abs(t - Math.round(t)) < 0.01;
-          html += `<div class="ruler-tick ${isMajor ? 'major' : ''}" style="left:${left}px;"></div>`;
           if (isMajor) {
-            html += `<div class="ruler-label" style="left:${left}px;">${Math.round(t)}s</div>`;
+            html += `<div class="ruler-label" style="left:${left}px;">00:${String(Math.round(t)).padStart(2, '0')}</div>`;
+          } else {
+            html += `<div class="ruler-dot" style="left:${left}px;"></div>`;
           }
         }
-        for (let b = 0; b <= totalDur; b += beatStep) {
-          html += `<div class="beat-dot-marker" style="left:${b * pxPerSec}px;"></div>`;
-        }
+        beatMarkers.forEach(b => {
+          html += `<div class="beat-dot-marker ${hasDetectedBeats ? 'detected' : ''}" style="left:${b * pxPerSec}px;"></div>`;
+        });
         html += `</div>`;
 
-        if (state.captions.enabled) {
-          const fontObj = CAPTION_FONTS.find(f => f.id === state.captions.fontId) || CAPTION_FONTS[0];
+        // 2. Stacked Orange Filter / LUT Span Bars (Edits screenshot 1)
+        state.lutLayers.forEach(layer => {
+          const leftPx = layer.startSec * pxPerSec;
+          const widthPx = Math.max(36, layer.durationSec * pxPerSec);
+          const isSelected = state.selectedType === 'lut' && state.selectedId === layer.id;
           html += `
-            <div class="caption-track-row" style="width:${totalWidthPx}px;">
-              <div class="caption-pill-bar" id="timelineCaptionPill" style="left:0px;width:${totalWidthPx}px;">
-                <span>CC • ${fontObj.label}</span>
-                <span style="opacity:0.75;">| ${state.captions.lines.map(l => l.text).join(' • ')}</span>
+            <div class="stacked-layer-row" style="width:${totalWidthPx}px;">
+              <div class="layer-span-pill lut-orange ${isSelected ? 'selected' : ''}"
+                   data-layer-type="lut" data-layer-id="${layer.id}"
+                   style="left:${leftPx}px;width:${widthPx}px;">
+                <div class="layer-trim-handle left" data-layer-handle="left" data-layer-type="lut" data-layer-id="${layer.id}">|</div>
+                <span class="layer-pill-label">${layer.label}</span>
+                <div class="layer-trim-handle right" data-layer-handle="right" data-layer-type="lut" data-layer-id="${layer.id}">|</div>
               </div>
             </div>
           `;
-        }
+        });
 
-        html += `<div class="video-track-row" style="width:${totalWidthPx}px;">`;
+        // 3. Stacked Purple Text Span Bars (Edits screenshot 1)
+        state.textLayers.forEach(layer => {
+          const leftPx = layer.startSec * pxPerSec;
+          const widthPx = Math.max(36, layer.durationSec * pxPerSec);
+          const isSelected = state.selectedType === 'text' && state.selectedId === layer.id;
+          const displayLabel = layer.text.replace(/\n/g, ' ');
+          html += `
+            <div class="stacked-layer-row" style="width:${totalWidthPx}px;">
+              <div class="layer-span-pill text-purple ${isSelected ? 'selected' : ''}"
+                   data-layer-type="text" data-layer-id="${layer.id}"
+                   style="left:${leftPx}px;width:${widthPx}px;">
+                <div class="layer-trim-handle left" data-layer-handle="left" data-layer-type="text" data-layer-id="${layer.id}">|</div>
+                <span class="layer-pill-label">${displayLabel}</span>
+                <div class="layer-trim-handle right" data-layer-handle="right" data-layer-type="text" data-layer-id="${layer.id}">|</div>
+              </div>
+            </div>
+          `;
+        });
+
+        // 4. Main Video Filmstrip Track + Mute Clip Anchor + White '+' Button at End
+        html += `<div class="video-track-row" style="width:${totalWidthPx + 54}px;">`;
+        html += `
+          <button class="capcut-mute-anchor ${state.clipAudioMuted ? 'muted' : ''}" id="btnTimelineMuteClip" title="Mute / Unmute Audio Klip">
+            <span style="font-size:13px;">${state.clipAudioMuted ? '🔇' : '🔊'}</span>
+            <span>${state.clipAudioMuted ? 'Muted' : 'Mute clip'}</span>
+          </button>
+        `;
+
         let cursorSec = 0;
-        const hasSelected = !!state.selectedClipId;
-
         state.clips.forEach((clip, index) => {
           const leftPx = cursorSec * pxPerSec;
-          const widthPx = Math.max(28, clip.durationSec * pxPerSec);
-          const isSelected = clip.id === state.selectedClipId;
-          const dimmedClass = hasSelected && !isSelected ? 'dimmed' : '';
+          const widthPx = Math.max(32, clip.durationSec * pxPerSec);
+          const isSelected = state.selectedType === 'clip' && state.selectedId === clip.id;
 
           const ghostLeftPx = -clip.sourceInSec * pxPerSec;
           const ghostWidthPx = clip.sourceTotalSec * pxPerSec;
+          const thumbsHtml = buildFilmstripThumbsHtml(clip, widthPx);
 
           html += `
-            <div class="video-clip-block ${isSelected ? 'selected' : ''} ${dimmedClass}"
+            <div class="video-clip-block ${isSelected ? 'selected' : ''}"
                  data-clip-id="${clip.id}"
                  style="left:${leftPx}px;width:${widthPx}px;">
               <div class="ghost-filmstrip" style="left:${ghostLeftPx}px;width:${ghostWidthPx}px;"></div>
               <div class="pill-handle left" data-handle="left" data-clip-id="${clip.id}">
                 <div class="pill-grip"></div>
               </div>
-              <div class="clip-inner-strip" data-clip-body="${clip.id}"
-                   style="background:linear-gradient(135deg, ${clip.colorA}, ${clip.colorB});">
-                <div class="clip-name-tag">${clip.name}</div>
-                <div class="clip-meta-row">
-                  <span class="clip-badge">${clip.durationSec.toFixed(1)}d</span>
-                  <span class="clip-badge">${clip.fx !== 'NONE' ? clip.fx.replace('_', ' ') : clip.velocity}</span>
+              <div class="filmstrip-frames-strip" data-clip-body="${clip.id}">
+                ${thumbsHtml}
+                <div class="clip-overlay-badges">
+                  <div class="clip-name-tag">${clip.name}</div>
+                  <div class="clip-meta-row">
+                    <span class="clip-badge">${clip.durationSec.toFixed(1)}d</span>
+                    <span class="clip-badge">${clip.fx !== 'NONE' ? clip.fx.replace('_', ' ') : clip.velocity}</span>
+                  </div>
                 </div>
               </div>
               <div class="pill-handle right" data-handle="right" data-clip-id="${clip.id}">
@@ -2360,8 +2847,14 @@
             `;
           }
         });
+
+        // White square '+' button right at the end of the video filmstrip (Edits & CapCut)
+        html += `
+          <button class="end-track-plus-btn" id="btnEndTrackPlus" style="left:${totalWidthPx + 6}px;" title="Tambah Video / Klip">+</button>
+        `;
         html += `</div>`;
 
+        // 5. Audio Waveform Track
         const waveBarsHtml = state.audio.waveform.slice(0, 48).map(v =>
           `<div class="mini-wave-bar" style="height:${Math.round(v * 100)}%;"></div>`
         ).join('');
@@ -2370,11 +2863,20 @@
           <div class="audio-track-row" style="width:${totalWidthPx}px;">
             <div class="audio-clip-bar" id="timelineAudioBar" style="left:0px;width:${totalWidthPx}px;">
               <div class="audio-title-line">
-                <span>${state.audio.title} • ${state.audio.bpm} BPM</span>
+                <span>♪ ${state.audio.title} • ${state.audio.bpm} BPM</span>
                 <span>Mulai ${formatTime(state.audio.startOffsetSec)}</span>
               </div>
               <div class="mini-wave-bars">${waveBarsHtml}</div>
             </div>
+          </div>
+        `;
+
+        // 6. CapCut Quick Action Lanes ('+ Add audio', '+ Add text', '+ Add filter')
+        html += `
+          <div class="capcut-quick-lanes">
+            <button class="quick-lane-btn" id="btnQuickAddAudio">♪ + Add audio</button>
+            <button class="quick-lane-btn" id="btnQuickAddText">T + Add text</button>
+            <button class="quick-lane-btn" id="btnQuickAddLut">✦ + Add filter</button>
           </div>
         `;
 
@@ -2384,16 +2886,140 @@
 
       function bindTimelineInteractions() {
         const pxPerSec = PX_PER_SEC_BASE * state.zoom;
+        const beatMarkers = getBeatTimestampsInTimeline();
+        const totalDur = getTotalDuration();
 
-        const capPill = document.getElementById('timelineCaptionPill');
-        if (capPill) {
-          capPill.addEventListener('click', (e) => {
+        // Mute clip toggle
+        const muteBtn = document.getElementById('btnTimelineMuteClip');
+        if (muteBtn) {
+          muteBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            renderCaptionsSheet();
-            openSheet('sheetCaptions');
+            state.clipAudioMuted = !state.clipAudioMuted;
+            renderTimeline();
+            showToast(state.clipAudioMuted ? 'Audio klip dimute' : 'Audio klip aktif');
           });
         }
 
+        // End-of-track white '+' button
+        const plusBtn = document.getElementById('btnEndTrackPlus');
+        if (plusBtn) {
+          plusBtn.addEventListener('pointerdown', e => e.stopPropagation());
+          plusBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openSheet('sheetAddClip');
+          });
+        }
+
+        // Quick CapCut lanes
+        const qAudio = document.getElementById('btnQuickAddAudio');
+        if (qAudio) qAudio.addEventListener('click', (e) => {
+          e.stopPropagation();
+          renderSongCatalog();
+          renderAudioScrubber();
+          openSheet('sheetAudio');
+        });
+
+        const qText = document.getElementById('btnQuickAddText');
+        if (qText) qText.addEventListener('click', (e) => {
+          e.stopPropagation();
+          addNewTextLayer();
+        });
+
+        const qLut = document.getElementById('btnQuickAddLut');
+        if (qLut) qLut.addEventListener('click', (e) => {
+          e.stopPropagation();
+          addNewLutLayer('CINEMATIC', 'Cinematic');
+        });
+
+        // Stacked Orange LUT & Purple Text Pills (tap to select, drag to move, drag handles to trim)
+        timelineContent.querySelectorAll('[data-layer-id]').forEach(pillEl => {
+          if (pillEl.hasAttribute('data-layer-handle')) return;
+          pillEl.addEventListener('pointerdown', (e) => {
+            if (e.target.hasAttribute('data-layer-handle')) return;
+            const lType = pillEl.getAttribute('data-layer-type');
+            const lId = pillEl.getAttribute('data-layer-id');
+            if (state.selectedType !== lType || state.selectedId !== lId) {
+              state.selectedType = lType;
+              state.selectedId = lId;
+              updateSubBar();
+              renderTimeline();
+              renderPreviewFrame();
+              return;
+            }
+            e.stopPropagation();
+            const list = lType === 'text' ? state.textLayers : state.lutLayers;
+            const item = list.find(x => x.id === lId);
+            if (!item) return;
+
+            pushHistory(`Geser Layer ${lType === 'text' ? 'Teks' : 'Filter'}`);
+            const startX = e.clientX;
+            const origStart = item.startSec;
+
+            const onMove = (ev) => {
+              const dx = ev.clientX - startX;
+              const deltaSec = dx / pxPerSec;
+              const maxStart = Math.max(0, totalDur - item.durationSec);
+              item.startSec = Math.max(0, Math.min(maxStart, +(origStart + deltaSec).toFixed(2)));
+              pillEl.style.left = `${item.startSec * pxPerSec}px`;
+              updateSubBar();
+              renderPreviewFrame();
+            };
+
+            const onUp = () => {
+              window.removeEventListener('pointermove', onMove);
+              window.removeEventListener('pointerup', onUp);
+              scheduleAutoSave();
+              renderTimeline();
+            };
+
+            window.addEventListener('pointermove', onMove);
+            window.addEventListener('pointerup', onUp);
+          });
+        });
+
+        // Trim handles on Orange LUT & Purple Text Pills
+        timelineContent.querySelectorAll('[data-layer-handle]').forEach(handleEl => {
+          handleEl.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            const side = handleEl.getAttribute('data-layer-handle');
+            const lType = handleEl.getAttribute('data-layer-type');
+            const lId = handleEl.getAttribute('data-layer-id');
+            const list = lType === 'text' ? state.textLayers : state.lutLayers;
+            const item = list.find(x => x.id === lId);
+            if (!item) return;
+
+            pushHistory(`Trim Durasi Layer`);
+            const startX = e.clientX;
+            const origStart = item.startSec;
+            const origDur = item.durationSec;
+
+            const onMove = (ev) => {
+              const dx = ev.clientX - startX;
+              const deltaSec = dx / pxPerSec;
+              if (side === 'right') {
+                item.durationSec = Math.max(0.4, Math.min(totalDur - origStart, +(origDur + deltaSec).toFixed(2)));
+              } else {
+                const shift = Math.max(-origStart, Math.min(origDur - 0.4, deltaSec));
+                item.startSec = +(origStart + shift).toFixed(2);
+                item.durationSec = +(origDur - shift).toFixed(2);
+              }
+              updateSubBar();
+              renderTimeline();
+              renderPreviewFrame();
+            };
+
+            const onUp = () => {
+              window.removeEventListener('pointermove', onMove);
+              window.removeEventListener('pointerup', onUp);
+              scheduleAutoSave();
+            };
+
+            window.addEventListener('pointermove', onMove);
+            window.addEventListener('pointerup', onUp);
+          });
+        });
+
+        // Audio bar click
         const audioBar = document.getElementById('timelineAudioBar');
         if (audioBar) {
           audioBar.addEventListener('click', (e) => {
@@ -2404,6 +3030,7 @@
           });
         }
 
+        // Transition nodes
         timelineContent.querySelectorAll('[data-transition-clip]').forEach(node => {
           node.addEventListener('pointerdown', e => e.stopPropagation());
           node.addEventListener('click', (e) => {
@@ -2414,13 +3041,17 @@
           });
         });
 
+        // Video Clip selection & Slip-Trim
         timelineContent.querySelectorAll('[data-clip-body]').forEach(bodyEl => {
           bodyEl.addEventListener('pointerdown', (e) => {
+            if (activePointers.size >= 2) return;
             const clipId = bodyEl.getAttribute('data-clip-body');
-            if (state.selectedClipId !== clipId) {
-              state.selectedClipId = clipId;
+            if (state.selectedType !== 'clip' || state.selectedId !== clipId) {
+              state.selectedType = 'clip';
+              state.selectedId = clipId;
               updateSubBar();
               renderTimeline();
+              renderPreviewFrame();
               return;
             }
             e.stopPropagation();
@@ -2429,7 +3060,7 @@
 
             const blockEl = bodyEl.closest('.video-clip-block');
             blockEl.classList.add('sliding');
-            pushHistory(`Geser Span ${clip.name}`);
+            pushHistory(`Slip ${clip.name}`);
 
             const startX = e.clientX;
             const origIn = clip.sourceInSec;
@@ -2464,13 +3095,18 @@
           });
         });
 
+        // 22px Left & Right Pill Handles on Video Clip with Magnetic Beat Snap
         timelineContent.querySelectorAll('[data-handle]').forEach(handleEl => {
           handleEl.addEventListener('pointerdown', (e) => {
             e.stopPropagation();
             const side = handleEl.getAttribute('data-handle');
             const clipId = handleEl.getAttribute('data-clip-id');
-            const clip = state.clips.find(c => c.id === clipId);
+            const clipIdx = state.clips.findIndex(c => c.id === clipId);
+            const clip = state.clips[clipIdx];
             if (!clip) return;
+
+            let clipStartInTimeline = 0;
+            for (let i = 0; i < clipIdx; i++) clipStartInTimeline += state.clips[i].durationSec;
 
             const blockEl = handleEl.closest('.video-clip-block');
             blockEl.classList.add('trimming');
@@ -2479,7 +3115,6 @@
             const startX = e.clientX;
             const origIn = clip.sourceInSec;
             const origDur = clip.durationSec;
-            const beatStep = getBeatIntervalSec();
             let lastSnapped = false;
 
             spanHud.classList.add('visible');
@@ -2490,9 +3125,12 @@
 
               if (side === 'right') {
                 let newDur = Math.max(0.3, Math.min(clip.sourceTotalSec - origIn, origDur + deltaSec));
-                const nearestBeat = Math.round(newDur / beatStep) * beatStep;
-                if (Math.abs(newDur - nearestBeat) < 0.08 && nearestBeat >= 0.3) {
-                  newDur = nearestBeat;
+                const endTimelineSec = clipStartInTimeline + newDur;
+                const nearestBeat = beatMarkers.reduce((best, b) =>
+                  Math.abs(b - endTimelineSec) < Math.abs(best - endTimelineSec) ? b : best, beatMarkers[0] || 0
+                );
+                if (Math.abs(endTimelineSec - nearestBeat) < 0.08 && (nearestBeat - clipStartInTimeline) >= 0.3) {
+                  newDur = nearestBeat - clipStartInTimeline;
                   if (!lastSnapped) { triggerHaptic(14); lastSnapped = true; }
                 } else {
                   lastSnapped = false;
@@ -2530,12 +3168,28 @@
         });
       }
 
+      /* =========================================================
+         TIMELINE SCRUB & 2-FINGER PINCH-TO-ZOOM
+         ========================================================= */
       let isScrubbingTimeline = false;
       let scrubStartX = 0;
       let scrubStartSec = 0;
+      const activePointers = new Map();
+      let initialPinchDist = 0;
+      let initialPinchZoom = 1.0;
 
       timelineScrollArea.addEventListener('pointerdown', (e) => {
-        if (e.target.closest('[data-handle]') || e.target.closest('[data-transition-clip]')) return;
+        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+        if (activePointers.size === 2) {
+          isScrubbingTimeline = false;
+          const pts = Array.from(activePointers.values());
+          initialPinchDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+          initialPinchZoom = state.zoom;
+          return;
+        }
+
+        if (e.target.closest('[data-handle]') || e.target.closest('[data-transition-clip]') || e.target.closest('[data-layer-handle]')) return;
         isScrubbingTimeline = true;
         scrubStartX = e.clientX;
         scrubStartSec = state.playheadSec;
@@ -2543,6 +3197,17 @@
       });
 
       window.addEventListener('pointermove', (e) => {
+        if (activePointers.has(e.pointerId)) {
+          activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        }
+
+        if (activePointers.size === 2 && initialPinchDist > 10) {
+          const pts = Array.from(activePointers.values());
+          const curDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+          setTimelineZoom(initialPinchZoom * (curDist / initialPinchDist));
+          return;
+        }
+
         if (!isScrubbingTimeline) return;
         const pxPerSec = PX_PER_SEC_BASE * state.zoom;
         const dx = e.clientX - scrubStartX;
@@ -2553,12 +3218,70 @@
         renderPreviewFrame();
       });
 
-      window.addEventListener('pointerup', () => {
+      window.addEventListener('pointerup', (e) => {
+        activePointers.delete(e.pointerId);
+        if (activePointers.size < 2) initialPinchDist = 0;
+        isScrubbingTimeline = false;
+      });
+
+      window.addEventListener('pointercancel', (e) => {
+        activePointers.delete(e.pointerId);
+        if (activePointers.size < 2) initialPinchDist = 0;
         isScrubbingTimeline = false;
       });
 
       /* =========================================================
-         AUDIO SEARCH, SYNTH PREVIEW & WAVEFORM SPAN
+         ADD / EDIT LAYER HELPERS (ORANGE LUT & PURPLE TEXT)
+         ========================================================= */
+      function addNewLutLayer(lutId = 'CINEMATIC', label = 'Cinematic') {
+        pushHistory(`Tambah Filter ${label}`);
+        const total = getTotalDuration();
+        const start = Math.min(Math.max(0, total - 1.5), +state.playheadSec.toFixed(1));
+        const dur = Math.min(3.5, +(total - start).toFixed(1));
+        const newLayer = {
+          id: 'lut_' + Date.now(),
+          lutId,
+          label,
+          startSec: start,
+          durationSec: Math.max(1.0, dur),
+          intensity: 90
+        };
+        state.lutLayers.push(newLayer);
+        state.selectedType = 'lut';
+        state.selectedId = newLayer.id;
+        renderAll();
+        showToast(`Layer Filter "${label}" ditambahkan`);
+      }
+
+      function addNewTextLayer(customText = 'Teks Baru') {
+        pushHistory('Tambah Layer Teks');
+        const total = getTotalDuration();
+        const start = Math.min(Math.max(0, total - 1.5), +state.playheadSec.toFixed(1));
+        const dur = Math.min(3.2, +(total - start).toFixed(1));
+        const offsetIdx = state.textLayers.length % 4;
+        const newTxt = {
+          id: 'txt_' + Date.now(),
+          text: customText,
+          startSec: start,
+          durationSec: Math.max(1.0, dur),
+          fontId: 'EDITS_SERIF',
+          styleId: 'EDITS_OUTLINE',
+          fontSize: 34,
+          color: '#FFF7D6',
+          xPercent: 50,
+          yPercent: 45 + offsetIdx * 10
+        };
+        state.textLayers.push(newTxt);
+        state.selectedType = 'text';
+        state.selectedId = newTxt.id;
+        renderAll();
+        renderTextAndCaptionsSheet();
+        openSheet('sheetCaptions');
+        showToast('Layer Teks baru ditambahkan (geser di layar)');
+      }
+
+      /* =========================================================
+         SHEETS & CATALOG RENDERERS
          ========================================================= */
       let audioCtx = null;
       let synthTimer = null;
@@ -2681,6 +3404,7 @@
               state.audio.bpm = song.bpm;
               state.audio.totalDurationSec = song.duration;
               state.audio.startOffsetSec = song.dropSec;
+              state.audio.detectedBeatsSec = [];
               state.audio.waveform = Array.from({ length: 84 }, (_, idx) =>
                 Math.max(0.18, Math.min(1, Math.abs(Math.sin(idx * (song.bpm / 320)) * 0.72 + Math.cos(idx * 0.8) * 0.28)))
               );
@@ -2704,8 +3428,9 @@
         selector.style.left = `${startRatio * 100}%`;
         selector.style.width = `${widthRatio * 100}%`;
 
+        const beatTag = (state.audio.detectedBeatsSec || []).length > 0 ? ' • Auto-Beat' : '';
         document.getElementById('audioSpanLabel').textContent =
-          `Mulai Lagu: ${formatTime(state.audio.startOffsetSec)} (${state.audio.bpm} BPM)`;
+          `Mulai: ${formatTime(state.audio.startOffsetSec)} (${state.audio.bpm} BPM${beatTag})`;
 
         container.innerHTML = state.audio.waveform.map((val, idx) => {
           const barRatio = idx / state.audio.waveform.length;
@@ -2782,29 +3507,53 @@
       }
 
       function renderLutSheet() {
+        const activeLut = getSelectedLutLayer();
         const lutGrid = document.getElementById('lutGrid');
         lutGrid.innerHTML = LUT_LIST.map(lut => `
-          <div class="option-card ${state.lutId === lut.id ? 'selected' : ''}" data-lut="${lut.id}">
+          <div class="option-card ${activeLut && activeLut.lutId === lut.id ? 'selected' : ''}" data-lut="${lut.id}" data-lut-label="${lut.label}">
             ${lut.label}
           </div>
         `).join('');
 
         lutGrid.querySelectorAll('[data-lut]').forEach(el => {
           el.addEventListener('click', () => {
-            pushHistory(`LUT ${el.textContent.trim()}`);
-            state.lutId = el.getAttribute('data-lut');
-            renderLutSheet();
-            renderPreviewFrame();
+            const lid = el.getAttribute('data-lut');
+            const lbl = el.getAttribute('data-lut-label');
+            if (activeLut) {
+              pushHistory(`Filter ${lbl}`);
+              activeLut.lutId = lid;
+              activeLut.label = lbl;
+              state.selectedType = 'lut';
+              state.selectedId = activeLut.id;
+              renderLutSheet();
+              renderAll();
+            } else {
+              addNewLutLayer(lid, lbl);
+              renderLutSheet();
+            }
           });
         });
       }
 
-      function renderCaptionsSheet() {
+      function renderTextAndCaptionsSheet() {
+        const voBar = document.getElementById('voiceoverStatusBar');
+        if (state.voiceover.audioEl) {
+          voBar.style.display = 'flex';
+          document.getElementById('voiceoverStatusLabel').textContent =
+            `🎙️ ${state.voiceover.label} (${state.voiceover.durationSec.toFixed(1)}d) • Auto-Ducking`;
+        } else {
+          voBar.style.display = 'none';
+        }
+
+        const activeTxt = getSelectedTextLayer();
+        const textInp = document.getElementById('activeTextLayerInput');
+        textInp.value = activeTxt ? activeTxt.text.replace(/\n/g, ' ') : '';
+
         const fontGrid = document.getElementById('captionFontGrid');
         fontGrid.innerHTML = CAPTION_FONTS.map(f => `
-          <div class="font-card ${state.captions.fontId === f.id ? 'selected' : ''}" data-font="${f.id}">
-            <div class="font-sample" style="font-family:${f.css};font-weight:${f.weight};text-transform:${f.transform};letter-spacing:${f.tracking};">
-              BEATSYNC
+          <div class="font-card ${activeTxt && activeTxt.fontId === f.id ? 'selected' : ''}" data-font="${f.id}">
+            <div class="font-sample" style="font-family:${f.css};font-weight:${f.weight};text-transform:${f.transform};">
+              BeatSync
             </div>
             <div class="font-label">${f.label}</div>
           </div>
@@ -2812,100 +3561,38 @@
 
         fontGrid.querySelectorAll('[data-font]').forEach(card => {
           card.addEventListener('click', () => {
+            if (!activeTxt) return;
             const fid = card.getAttribute('data-font');
-            pushHistory(`Font Caption ${fid}`);
-            state.captions.fontId = fid;
-            renderCaptionsSheet();
-            renderTimeline();
+            pushHistory(`Font Teks ${fid}`);
+            activeTxt.fontId = fid;
+            state.selectedType = 'text';
+            state.selectedId = activeTxt.id;
+            renderTextAndCaptionsSheet();
             renderPreviewFrame();
           });
         });
 
         const styleGrid = document.getElementById('captionStyleGrid');
         styleGrid.innerHTML = CAPTION_STYLES.map(s => `
-          <div class="option-card ${state.captions.styleId === s.id ? 'selected' : ''}" data-cap-style="${s.id}">
+          <div class="option-card ${activeTxt && activeTxt.styleId === s.id ? 'selected' : ''}" data-cap-style="${s.id}">
             ${s.label}
           </div>
         `).join('');
 
         styleGrid.querySelectorAll('[data-cap-style]').forEach(card => {
           card.addEventListener('click', () => {
-            pushHistory(`Gaya Caption ${card.textContent.trim()}`);
-            state.captions.styleId = card.getAttribute('data-cap-style');
-            renderCaptionsSheet();
+            if (!activeTxt) return;
+            pushHistory(`Gaya Teks ${card.textContent.trim()}`);
+            activeTxt.styleId = card.getAttribute('data-cap-style');
+            renderTextAndCaptionsSheet();
             renderPreviewFrame();
           });
         });
 
-        const totalDur = getTotalDuration();
-        const linesEl = document.getElementById('captionLinesEditor');
-        linesEl.innerHTML = state.captions.lines.map((line, idx) => {
-          const sSec = (line.ratioStart * totalDur).toFixed(1);
-          const eSec = (line.ratioEnd * totalDur).toFixed(1);
-          return `
-            <div class="caption-line-item">
-              <span class="caption-time-tag">${sSec}–${eSec}d</span>
-              <input type="text" class="text-input" data-cap-line="${idx}" value="${line.text}" />
-            </div>
-          `;
-        }).join('');
-
-        linesEl.querySelectorAll('[data-cap-line]').forEach(inp => {
-          inp.addEventListener('input', () => {
-            const idx = +inp.getAttribute('data-cap-line');
-            state.captions.lines[idx].text = inp.value;
-            scheduleAutoSave();
-            renderTimeline();
-            renderPreviewFrame();
-          });
-        });
-      }
-
-      function renderMediaBinSheet() {
-        const list = document.getElementById('mediaClipOrderList');
-        list.innerHTML = state.clips.map((c, idx) => `
-          <div class="song-item">
-            <div class="song-info">
-              <div class="song-name">${idx + 1}. ${c.name}</div>
-              <div class="song-sub">Durasi: ${c.durationSec.toFixed(1)}d • Potongan: ${c.sourceInSec.toFixed(1)}d / ${c.sourceTotalSec.toFixed(1)}d</div>
-            </div>
-            <div class="nudge-group">
-              <button class="sub-pill" data-move-up="${idx}" ${idx === 0 ? 'disabled' : ''}>↑</button>
-              <button class="sub-pill" data-move-down="${idx}" ${idx === state.clips.length - 1 ? 'disabled' : ''}>↓</button>
-              <button class="sub-pill primary" data-select-media="${c.id}">Pilih</button>
-            </div>
-          </div>
-        `).join('');
-
-        list.querySelectorAll('[data-move-up]').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const idx = +btn.getAttribute('data-move-up');
-            if (idx <= 0) return;
-            pushHistory('Tukar Urutan Klip');
-            [state.clips[idx - 1], state.clips[idx]] = [state.clips[idx], state.clips[idx - 1]];
-            renderMediaBinSheet();
-            renderAll();
-          });
-        });
-
-        list.querySelectorAll('[data-move-down]').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const idx = +btn.getAttribute('data-move-down');
-            if (idx >= state.clips.length - 1) return;
-            pushHistory('Tukar Urutan Klip');
-            [state.clips[idx + 1], state.clips[idx]] = [state.clips[idx], state.clips[idx + 1]];
-            renderMediaBinSheet();
-            renderAll();
-          });
-        });
-
-        list.querySelectorAll('[data-select-media]').forEach(btn => {
-          btn.addEventListener('click', () => {
-            state.selectedClipId = btn.getAttribute('data-select-media');
-            closeSheet('sheetMedia');
-            renderAll();
-          });
-        });
+        if (activeTxt) {
+          document.getElementById('sliderTextSize').value = activeTxt.fontSize || 36;
+          document.getElementById('valTextSize').textContent = `${activeTxt.fontSize || 36}px`;
+        }
       }
 
       function renderTransitionOptions() {
@@ -2960,9 +3647,9 @@
                   ? `<span class="sub-pill success">Aktif</span>`
                   : `<button class="sub-pill primary" data-load-proj="${proj.id}">Buka</button>`
                 }
-                <button class="sub-pill" data-dup-proj="${proj.id}" title="Duplikat Draf">Copy</button>
+                <button class="sub-pill" data-dup-proj="${proj.id}">Copy</button>
                 ${projects.length > 1
-                  ? `<button class="sub-pill danger" data-del-proj="${proj.id}" title="Hapus Draf">×</button>`
+                  ? `<button class="sub-pill danger" data-del-proj="${proj.id}">×</button>`
                   : ''
                 }
               </div>
@@ -2974,7 +3661,7 @@
           <div style="font-size:11px;font-weight:700;color:var(--text-secondary);margin-bottom:5px;">Nama Proyek Aktif (Auto-Save)</div>
           <div class="search-row" style="margin-bottom:10px;">
             <input type="text" class="text-input" id="inputProjectName" value="${state.projectName.replace(/"/g, '&quot;')}" />
-            <button class="sub-pill success" id="btnManualSaveDraft" style="height:36px;padding:0 12px;">Simpan</button>
+            <button class="sub-pill" id="btnManualSaveDraft" style="height:36px;padding:0 12px;border-color:#10B981;color:#6EE7B7;">Simpan</button>
           </div>
 
           <div style="font-size:11px;font-weight:700;color:var(--text-secondary);margin-bottom:5px;">Rasio Layar Proyek Ini</div>
@@ -2999,13 +3686,13 @@
 
         const nameInp = document.getElementById('inputProjectName');
         nameInp.addEventListener('input', () => {
-          state.projectName = nameInp.value.trim() || 'BeatSync Project';
+          state.projectName = nameInp.value.trim() || 'New project';
           document.getElementById('headerProjectName').textContent = state.projectName;
           scheduleAutoSave();
         });
 
         document.getElementById('btnManualSaveDraft').addEventListener('click', () => {
-          state.projectName = nameInp.value.trim() || 'BeatSync Project';
+          state.projectName = nameInp.value.trim() || 'New project';
           persistProjectNow(false);
           openProjectHistoryModal();
         });
@@ -3023,7 +3710,7 @@
         document.getElementById('btnCreateNewProject').addEventListener('click', () => {
           persistProjectNow(true);
           const count = loadProjectListFromStorage().length + 1;
-          const fresh = createDefaultProjectState('proj_' + Date.now(), `BeatSync Cut #${count}`, state.aspectIdx);
+          const fresh = createDefaultProjectState('proj_' + Date.now(), `New project #${count}`, state.aspectIdx);
           Object.assign(state, fresh, { undoStack: [], redoStack: [], isPlaying: false });
           setAspectRatioByIndex(state.aspectIdx, true);
           persistProjectNow(true);
@@ -3034,8 +3721,7 @@
 
         document.getElementById('btnDuplicateCurrent').addEventListener('click', () => {
           persistProjectNow(true);
-          const copyId = 'proj_' + Date.now();
-          state.projectId = copyId;
+          state.projectId = 'proj_' + Date.now();
           state.projectName = `${state.projectName} (Copy)`;
           persistProjectNow(true);
           openProjectHistoryModal();
@@ -3044,8 +3730,7 @@
 
         document.querySelectorAll('[data-load-proj]').forEach(btn => {
           btn.addEventListener('click', () => {
-            const targetId = btn.getAttribute('data-load-proj');
-            const target = loadProjectListFromStorage().find(p => p.id === targetId);
+            const target = loadProjectListFromStorage().find(p => p.id === btn.getAttribute('data-load-proj'));
             if (target) {
               loadProjectEntry(target);
               closeSheet('sheetProject');
@@ -3056,9 +3741,8 @@
 
         document.querySelectorAll('[data-dup-proj]').forEach(btn => {
           btn.addEventListener('click', () => {
-            const targetId = btn.getAttribute('data-dup-proj');
             const list = loadProjectListFromStorage();
-            const src = list.find(p => p.id === targetId);
+            const src = list.find(p => p.id === btn.getAttribute('data-dup-proj'));
             if (!src) return;
             const cloned = JSON.parse(JSON.stringify(src));
             cloned.id = 'proj_' + Date.now();
@@ -3078,20 +3762,30 @@
             const targetId = btn.getAttribute('data-del-proj');
             let list = loadProjectListFromStorage().filter(p => p.id !== targetId);
             saveProjectListToStorage(list);
-            if (targetId === state.projectId && list.length > 0) {
-              loadProjectEntry(list[0]);
-            }
+            if (targetId === state.projectId && list.length > 0) loadProjectEntry(list[0]);
             openProjectHistoryModal();
-            showToast('Draf dihapus dari riwayat');
+            showToast('Draf dihapus');
           });
         });
       }
 
       /* =========================================================
-         PLAYBACK LOOP & MEDIA FILE LOADERS
+         PLAYBACK LOOP
          ========================================================= */
       let rafId = null;
       let lastFrameTime = 0;
+
+      function syncAudioPlaybackVolumes() {
+        const hasActiveVo = state.voiceover.audioEl && state.playheadSec <= state.voiceover.durationSec;
+        const duckFactor = (state.audio.autoDucking && hasActiveVo) ? 0.25 : 1.0;
+
+        if (state.audio.audioEl) {
+          state.audio.audioEl.volume = Math.max(0, Math.min(1, (state.audio.musicVol / 100) * duckFactor));
+        }
+        if (state.voiceover.audioEl) {
+          state.voiceover.audioEl.volume = 1.0;
+        }
+      }
 
       function togglePlay(forceState = null) {
         state.isPlaying = forceState !== null ? forceState : !state.isPlaying;
@@ -3099,26 +3793,27 @@
         document.getElementById('iconPause').style.display = state.isPlaying ? 'block' : 'none';
 
         if (state.isPlaying) {
-          if (state.playheadSec >= getTotalDuration() - 0.05) {
-            state.playheadSec = 0;
-          }
+          if (state.playheadSec >= getTotalDuration() - 0.05) state.playheadSec = 0;
+          syncAudioPlaybackVolumes();
           if (state.audio.audioEl) {
             try {
               state.audio.audioEl.currentTime = state.audio.startOffsetSec + state.playheadSec;
-              state.audio.audioEl.volume = state.audio.musicVol / 100;
               state.audio.audioEl.play();
+            } catch (_) {}
+          }
+          if (state.voiceover.audioEl && state.playheadSec < state.voiceover.durationSec) {
+            try {
+              state.voiceover.audioEl.currentTime = state.playheadSec;
+              state.voiceover.audioEl.play();
             } catch (_) {}
           }
           lastFrameTime = performance.now();
           rafId = requestAnimationFrame(playbackLoop);
         } else {
           cancelAnimationFrame(rafId);
-          if (state.audio.audioEl) {
-            try { state.audio.audioEl.pause(); } catch (_) {}
-          }
-          state.clips.forEach(c => {
-            if (c.videoEl) try { c.videoEl.pause(); } catch (_) {}
-          });
+          if (state.audio.audioEl) try { state.audio.audioEl.pause(); } catch (_) {}
+          if (state.voiceover.audioEl) try { state.voiceover.audioEl.pause(); } catch (_) {}
+          Object.values(videoElementPool).forEach(v => { try { v.pause(); } catch (_) {} });
         }
       }
 
@@ -3129,9 +3824,11 @@
 
         const total = getTotalDuration();
         state.playheadSec += dt;
+        syncAudioPlaybackVolumes();
 
-        const beatIdx = Math.floor(state.playheadSec / getBeatIntervalSec());
-        if (beatIdx !== state.lastBeatIndex) {
+        const beatMarkers = getBeatTimestampsInTimeline();
+        const beatIdx = beatMarkers.findIndex(b => Math.abs(b - state.playheadSec) < 0.03);
+        if (beatIdx >= 0 && beatIdx !== state.lastBeatIndex) {
           state.lastBeatIndex = beatIdx;
           triggerHaptic(8);
         }
@@ -3146,15 +3843,13 @@
         updateTimecode();
         renderPreviewFrame();
 
-        if (state.isPlaying) {
-          rafId = requestAnimationFrame(playbackLoop);
-        }
+        if (state.isPlaying) rafId = requestAnimationFrame(playbackLoop);
       }
 
-      const videoFileInput = document.getElementById('videoFileInput');
-      videoFileInput.addEventListener('change', (e) => {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
+      /* =========================================================
+         MEDIA FILE LOADERS (VIDEO FILMSTRIP, AUDIO, CUSTOM FONT)
+         ========================================================= */
+      function loadVideoFileIntoProject(file, mode = 'replace') {
         const url = URL.createObjectURL(file);
         const videoEl = document.createElement('video');
         videoEl.src = url;
@@ -3163,84 +3858,197 @@
         videoEl.preload = 'auto';
 
         videoEl.onloadedmetadata = () => {
-          pushHistory(`Impor Video ${file.name}`);
+          const mediaId = 'media_' + Date.now();
+          videoElementPool[mediaId] = videoEl;
+          extractFilmstripThumbnails(mediaId, videoEl);
+
           const realDur = Math.max(2.0, videoEl.duration || 10.0);
-          const targetClip = getSelectedClip();
-          if (targetClip) {
-            targetClip.name = file.name;
-            targetClip.sourceTotalSec = +realDur.toFixed(1);
-            targetClip.sourceInSec = 0;
-            targetClip.durationSec = Math.min(2.5, +realDur.toFixed(1));
-            targetClip.videoEl = videoEl;
+          if (mode === 'append') {
+            pushHistory(`Tambah Video ${file.name}`);
+            const newClip = {
+              id: 'c_' + Date.now(),
+              mediaId,
+              name: file.name,
+              sourceTotalSec: +realDur.toFixed(1),
+              sourceInSec: 0,
+              durationSec: Math.min(3.0, +realDur.toFixed(1)),
+              colorA: '#0057B8',
+              colorB: '#0F172A',
+              fx: 'ZOOM_PUNCH',
+              velocity: 'NORMAL',
+              transitionOut: 'NONE'
+            };
+            state.clips.push(newClip);
+            state.selectedType = 'clip';
+            state.selectedId = newClip.id;
+          } else {
+            pushHistory(`Ganti Video ${file.name}`);
+            const targetClip = getSelectedClip();
+            if (targetClip) {
+              targetClip.mediaId = mediaId;
+              targetClip.name = file.name;
+              targetClip.sourceTotalSec = +realDur.toFixed(1);
+              targetClip.sourceInSec = 0;
+              targetClip.durationSec = Math.min(3.0, +realDur.toFixed(1));
+            }
           }
           renderAll();
-          renderMediaBinSheet();
-          showToast(`Video dimuat: ${file.name}`);
+          showToast(`Video dimuat (${realDur.toFixed(1)}d)`);
         };
+      }
+
+      const videoFileInput = document.getElementById('videoFileInput');
+      videoFileInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) loadVideoFileIntoProject(file, 'replace');
         videoFileInput.value = '';
       });
 
-      const audioFileInput = document.getElementById('audioFileInput');
-      audioFileInput.addEventListener('change', async (e) => {
+      const appendVideoFileInput = document.getElementById('appendVideoFileInput');
+      appendVideoFileInput.addEventListener('change', (e) => {
         const file = e.target.files && e.target.files[0];
-        if (!file) return;
+        if (file) loadVideoFileIntoProject(file, 'append');
+        appendVideoFileInput.value = '';
+      });
+
+      async function decodeAndAnalyzeAudioFile(file, sourceTag) {
         const url = URL.createObjectURL(file);
         const audioEl = new Audio(url);
+        audioEl.crossOrigin = 'anonymous';
 
-        pushHistory(`Impor Audio ${file.name}`);
-        state.audio.title = file.name;
-        state.audio.artist = 'Audio Lokal';
-        state.audio.source = 'Lokal';
+        pushHistory(`Audio: ${file.name}`);
+        state.audio.title = file.name.replace(/\.[^/.]+$/, '');
+        state.audio.artist = sourceTag;
+        state.audio.source = sourceTag;
         state.audio.audioEl = audioEl;
 
         audioEl.onloadedmetadata = () => {
-          state.audio.totalDurationSec = Math.max(10, audioEl.duration || 120);
-          state.audio.startOffsetSec = 0;
+          state.audio.totalDurationSec = Math.max(5, audioEl.duration || 60);
           renderAudioScrubber();
           renderTimeline();
         };
 
         try {
+          showToast('Menganalisis tempo & puncak beat...');
           const arrayBuf = await file.arrayBuffer();
           const decodeCtx = new (window.AudioContext || window.webkitAudioContext)();
           const audioBuf = await decodeCtx.decodeAudioData(arrayBuf);
-          const ch = audioBuf.getChannelData(0);
-          const samples = 84;
-          const blockSize = Math.floor(ch.length / samples);
-          const peaks = [];
-          for (let i = 0; i < samples; i++) {
-            let sum = 0;
-            for (let j = 0; j < blockSize; j++) {
-              sum += Math.abs(ch[i * blockSize + j] || 0);
-            }
-            peaks.push(Math.max(0.15, Math.min(1, (sum / blockSize) * 3.2)));
-          }
-          state.audio.waveform = peaks;
+          const analysis = analyzeAudioBufferBeats(audioBuf);
+
+          state.audio.bpm = analysis.bpm;
+          state.audio.waveform = analysis.waveform;
+          state.audio.detectedBeatsSec = analysis.detectedBeatsSec;
+          state.audio.startOffsetSec = analysis.dropSec;
+          state.audio.totalDurationSec = Math.max(5, audioBuf.duration);
+
           renderAudioScrubber();
           renderTimeline();
-        } catch (_) {}
+          showToast(`Beat terdeteksi: ${analysis.bpm} BPM (${analysis.detectedBeatsSec.length} ketukan)`);
+        } catch (_) {
+          renderAudioScrubber();
+          renderTimeline();
+          showToast(`Audio dimuat: ${file.name}`);
+        }
+      }
 
-        showToast(`Lagu lokal dimuat: ${file.name}`);
-        audioFileInput.value = '';
+      document.getElementById('audioFileInput').addEventListener('change', async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) await decodeAndAnalyzeAudioFile(file, 'Audio Lokal');
+        e.target.value = '';
+      });
+
+      document.getElementById('extractVideoAudioInput').addEventListener('change', async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) await decodeAndAnalyzeAudioFile(file, 'Ekstrak Video');
+        e.target.value = '';
+      });
+
+      document.getElementById('customFontFileInput').addEventListener('change', async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        try {
+          const fontName = file.name.replace(/\.[^/.]+$/, '').replace(/[^a-zA-Z0-9 _-]/g, '') || 'CustomFont';
+          const buf = await file.arrayBuffer();
+          const fontFace = new FontFace(fontName, buf);
+          await fontFace.load();
+          document.fonts.add(fontFace);
+
+          const customId = 'CUSTOM_' + Date.now();
+          CAPTION_FONTS.unshift({
+            id: customId,
+            label: `${fontName} (Kustom)`,
+            css: `'${fontName}', sans-serif`,
+            weight: '800',
+            transform: 'none'
+          });
+          const activeTxt = getSelectedTextLayer();
+          if (activeTxt) activeTxt.fontId = customId;
+          renderTextAndCaptionsSheet();
+          renderPreviewFrame();
+          showToast(`Font "${fontName}" berhasil dipasang!`);
+        } catch (_) {
+          showToast('Gagal memuat file font (.ttf/.otf)');
+        }
+        e.target.value = '';
       });
 
       /* =========================================================
-         TOP BAR, TRANSPORT & DOCK BUTTON BINDINGS
+         LIVE VOICEOVER MIC RECORDER
+         ========================================================= */
+      let voRecorder = null;
+      let voChunks = [];
+      let voStartTime = 0;
+
+      document.getElementById('btnRecordVoiceover').addEventListener('click', async (e) => {
+        const btn = e.currentTarget;
+        if (voRecorder && voRecorder.state === 'recording') {
+          voRecorder.stop();
+          btn.classList.remove('rec-pulse-btn');
+          btn.textContent = '● Rekam Mic';
+          return;
+        }
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          voChunks = [];
+          voRecorder = new MediaRecorder(stream);
+          voStartTime = performance.now();
+
+          voRecorder.ondataavailable = (ev) => { if (ev.data && ev.data.size > 0) voChunks.push(ev.data); };
+          voRecorder.onstop = () => {
+            stream.getTracks().forEach(t => t.stop());
+            const dur = Math.max(0.5, (performance.now() - voStartTime) / 1000);
+            const blob = new Blob(voChunks, { type: 'audio/webm' });
+            state.voiceover.audioEl = new Audio(URL.createObjectURL(blob));
+            state.voiceover.durationSec = dur;
+            state.voiceover.label = 'Rekaman Voiceover';
+            renderTextAndCaptionsSheet();
+            showToast(`Voiceover direkam (${dur.toFixed(1)}d) • Auto-Ducking aktif`);
+          };
+
+          voRecorder.start();
+          btn.classList.add('rec-pulse-btn');
+          btn.textContent = '■ Stop Rekam';
+          showToast('Merekam suara mikrofon...');
+        } catch (_) {
+          showToast('Izin mikrofon tidak tersedia');
+        }
+      });
+
+      document.getElementById('btnClearVoiceover').addEventListener('click', () => {
+        state.voiceover = { audioEl: null, durationSec: 0, label: '' };
+        renderTextAndCaptionsSheet();
+        showToast('Rekaman voiceover dihapus');
+      });
+
+      /* =========================================================
+         BUTTON & DOCK WIRING
          ========================================================= */
       document.getElementById('btnMenuProject').addEventListener('click', openProjectHistoryModal);
       document.getElementById('brandProjectTrigger').addEventListener('click', openProjectHistoryModal);
 
+      document.getElementById('btnZoomIn').addEventListener('click', () => setTimelineZoom(state.zoom + 0.25));
+      document.getElementById('btnZoomOut').addEventListener('click', () => setTimelineZoom(state.zoom - 0.25));
       document.getElementById('btnPlayPause').addEventListener('click', () => togglePlay());
-      document.getElementById('btnStepBack').addEventListener('click', () => {
-        if (state.isPlaying) togglePlay(false);
-        state.playheadSec = Math.max(0, +(state.playheadSec - 0.1).toFixed(1));
-        renderAll();
-      });
-      document.getElementById('btnStepForward').addEventListener('click', () => {
-        if (state.isPlaying) togglePlay(false);
-        state.playheadSec = Math.min(getTotalDuration(), +(state.playheadSec + 0.1).toFixed(1));
-        renderAll();
-      });
 
       document.getElementById('btnUndo').addEventListener('click', () => {
         if (!state.undoStack.length) return;
@@ -3275,7 +4083,7 @@
       document.getElementById('btnNudgeLeft').addEventListener('click', () => {
         const clip = getSelectedClip();
         if (!clip) return;
-        pushHistory('Geser Potongan -0.1d');
+        pushHistory('Slip -0.1d');
         clip.sourceInSec = Math.max(0, +(clip.sourceInSec - 0.1).toFixed(1));
         renderAll();
       });
@@ -3283,33 +4091,69 @@
       document.getElementById('btnNudgeRight').addEventListener('click', () => {
         const clip = getSelectedClip();
         if (!clip) return;
-        pushHistory('Geser Potongan +0.1d');
+        pushHistory('Slip +0.1d');
         const maxIn = Math.max(0, clip.sourceTotalSec - clip.durationSec);
         clip.sourceInSec = Math.min(maxIn, +(clip.sourceInSec + 0.1).toFixed(1));
         renderAll();
       });
 
-      document.getElementById('btnImportVideo').addEventListener('click', () => videoFileInput.click());
-      document.getElementById('btnMediaPickLocal').addEventListener('click', () => videoFileInput.click());
-      document.getElementById('btnImportLocalAudio').addEventListener('click', () => audioFileInput.click());
+      function duplicateSelectedClip() {
+        const src = getSelectedClip();
+        if (!src) return;
+        pushHistory(`Duplikat ${src.name}`);
+        const idx = state.clips.findIndex(c => c.id === src.id);
+        const nextIn = Math.min(
+          Math.max(0, src.sourceTotalSec - src.durationSec),
+          +(src.sourceInSec + src.durationSec).toFixed(1)
+        );
+        const clone = { ...src, id: 'c_' + Date.now(), sourceInSec: nextIn };
+        state.clips.splice(idx + 1, 0, clone);
+        state.selectedType = 'clip';
+        state.selectedId = clone.id;
+        triggerHaptic(14);
+        renderAll();
+        showToast(`Klip diduplikat (${nextIn.toFixed(1)}d–${(nextIn + clone.durationSec).toFixed(1)}d)`);
+      }
 
-      document.getElementById('btnVelocitySheet').addEventListener('click', () => {
-        renderFxAndVelocitySheet();
-        openSheet('sheetFx');
+      document.getElementById('btnDuplicateClip').addEventListener('click', duplicateSelectedClip);
+      document.getElementById('btnAddClipFromGallery').addEventListener('click', () => {
+        closeSheet('sheetAddClip');
+        appendVideoFileInput.click();
+      });
+      document.getElementById('btnAddClipDuplicatePool').addEventListener('click', () => {
+        closeSheet('sheetAddClip');
+        duplicateSelectedClip();
+      });
+      document.getElementById('btnReplaceActiveClipGallery').addEventListener('click', () => {
+        closeSheet('sheetAddClip');
+        videoFileInput.click();
       });
 
-      document.getElementById('btnDeleteClip').addEventListener('click', () => {
-        if (state.clips.length <= 1) {
-          showToast('Minimal harus ada 1 klip di timeline');
-          return;
+      document.getElementById('btnDeleteSelectedLayer').addEventListener('click', () => {
+        if (state.selectedType === 'text') {
+          pushHistory('Hapus Layer Teks');
+          state.textLayers = state.textLayers.filter(t => t.id !== state.selectedId);
+          state.selectedType = 'clip';
+          state.selectedId = state.clips[0].id;
+          renderAll();
+          showToast('Layer teks dihapus');
+        } else if (state.selectedType === 'lut') {
+          pushHistory('Hapus Layer Filter');
+          state.lutLayers = state.lutLayers.filter(l => l.id !== state.selectedId);
+          state.selectedType = 'clip';
+          state.selectedId = state.clips[0].id;
+          renderAll();
+          showToast('Layer filter dihapus');
+        } else {
+          if (state.clips.length <= 1) { showToast('Minimal harus ada 1 klip'); return; }
+          const clip = getSelectedClip();
+          pushHistory(`Hapus ${clip.name}`);
+          state.clips = state.clips.filter(c => c.id !== clip.id);
+          state.selectedId = state.clips[0].id;
+          state.playheadSec = Math.min(state.playheadSec, getTotalDuration());
+          renderAll();
+          showToast(`Klip ${clip.name} dihapus`);
         }
-        const clip = getSelectedClip();
-        pushHistory(`Hapus ${clip.name}`);
-        state.clips = state.clips.filter(c => c.id !== clip.id);
-        state.selectedClipId = state.clips[0].id;
-        state.playheadSec = Math.min(state.playheadSec, getTotalDuration());
-        renderAll();
-        showToast(`Klip ${clip.name} dihapus`);
       });
 
       document.getElementById('btnAspectRatio').addEventListener('click', () => {
@@ -3322,7 +4166,6 @@
         state.resIdx = (state.resIdx + 1) % RESOLUTIONS.length;
         e.target.textContent = RESOLUTIONS[state.resIdx];
         scheduleAutoSave();
-        showToast(`Resolusi ekspor: ${RESOLUTIONS[state.resIdx]}`);
       });
 
       document.getElementById('btnToggleSafeZone').addEventListener('click', (e) => {
@@ -3335,7 +4178,6 @@
         state.hapticEnabled = !state.hapticEnabled;
         e.currentTarget.classList.toggle('active', state.hapticEnabled);
         if (state.hapticEnabled) triggerHaptic(15);
-        showToast(`Haptic Beat Tick: ${state.hapticEnabled ? 'Aktif' : 'Nonaktif'}`);
       });
 
       document.querySelectorAll('.dock-item').forEach(btn => {
@@ -3345,6 +4187,9 @@
             renderSongCatalog();
             renderAudioScrubber();
             openSheet('sheetAudio');
+          } else if (tool === 'text') {
+            renderTextAndCaptionsSheet();
+            openSheet('sheetCaptions');
           } else if (tool === 'split') {
             let accum = 0;
             for (let i = 0; i < state.clips.length; i++) {
@@ -3361,7 +4206,8 @@
                 };
                 c.durationSec = firstDur;
                 state.clips.splice(i + 1, 0, secondClip);
-                state.selectedClipId = secondClip.id;
+                state.selectedType = 'clip';
+                state.selectedId = secondClip.id;
                 triggerHaptic(15);
                 renderAll();
                 showToast('Klip dipotong di posisi playhead');
@@ -3377,14 +4223,15 @@
             renderLutSheet();
             openSheet('sheetLut');
           } else if (tool === 'captions') {
-            renderCaptionsSheet();
+            renderTextAndCaptionsSheet();
             openSheet('sheetCaptions');
-          } else if (tool === 'media') {
-            renderMediaBinSheet();
-            openSheet('sheetMedia');
           }
         });
       });
+
+      document.getElementById('btnImportLocalAudio').addEventListener('click', () => audioFileInput.click());
+      document.getElementById('btnExtractVideoAudio').addEventListener('click', () => extractVideoAudioInput.click());
+      document.getElementById('btnUploadCustomFont').addEventListener('click', () => customFontFileInput.click());
 
       document.getElementById('audioSearchInput').addEventListener('input', (e) => {
         state.audio.searchQuery = e.target.value;
@@ -3428,6 +4275,7 @@
       document.getElementById('sliderMusicVol').addEventListener('input', (e) => {
         state.audio.musicVol = +e.target.value;
         document.getElementById('valMusicVol').textContent = `${state.audio.musicVol}%`;
+        syncAudioPlaybackVolumes();
         scheduleAutoSave();
       });
 
@@ -3437,91 +4285,84 @@
         scheduleAutoSave();
       });
 
+      document.getElementById('chkAutoDucking').addEventListener('change', (e) => {
+        state.audio.autoDucking = e.target.checked;
+        syncAudioPlaybackVolumes();
+        scheduleAutoSave();
+      });
+
+      document.getElementById('btnAddNewLutLayer').addEventListener('click', () => {
+        addNewLutLayer('CINESTILL_800T', 'CineStill 800T');
+        renderLutSheet();
+      });
+
       document.getElementById('sliderLutIntensity').addEventListener('input', (e) => {
-        state.lutIntensity = +e.target.value;
-        document.getElementById('valLutIntensity').textContent = `${state.lutIntensity}%`;
+        const activeLut = getSelectedLutLayer();
+        if (activeLut) activeLut.intensity = +e.target.value;
+        document.getElementById('valLutIntensity').textContent = `${e.target.value}%`;
         scheduleAutoSave();
         renderPreviewFrame();
       });
 
-      document.getElementById('btnCapSrcLyrics').addEventListener('click', (e) => {
-        state.captions.sourceMode = 'lyrics';
-        e.target.classList.add('active');
-        document.getElementById('btnCapSrcVoice').classList.remove('active');
+      document.getElementById('btnAddTextLayerSheet').addEventListener('click', () => {
+        addNewTextLayer('Teks Layer Baru');
       });
 
-      document.getElementById('btnCapSrcVoice').addEventListener('click', (e) => {
-        state.captions.sourceMode = 'voiceover';
-        e.target.classList.add('active');
-        document.getElementById('btnCapSrcLyrics').classList.remove('active');
+      document.getElementById('activeTextLayerInput').addEventListener('input', (e) => {
+        const activeTxt = getSelectedTextLayer();
+        if (!activeTxt) return;
+        activeTxt.text = e.target.value;
+        scheduleAutoSave();
+        renderTimeline();
+        renderPreviewFrame();
+      });
+
+      document.getElementById('sliderTextSize').addEventListener('input', (e) => {
+        const activeTxt = getSelectedTextLayer();
+        if (!activeTxt) return;
+        activeTxt.fontSize = +e.target.value;
+        document.getElementById('valTextSize').textContent = `${activeTxt.fontSize}px`;
+        scheduleAutoSave();
+        renderPreviewFrame();
       });
 
       document.getElementById('btnGenerateCaptions').addEventListener('click', () => {
-        pushHistory('Generate Auto Captions');
-        state.captions.enabled = true;
-        if (state.captions.sourceMode === 'voiceover') {
-          state.captions.lines = [
-            { id: 'v1', ratioStart: 0.0, ratioEnd: 0.35, text: 'START PAGI INI DI JALUR SPRINT' },
-            { id: 'v2', ratioStart: 0.35, ratioEnd: 0.7, text: 'RITME STABIL IKUTI KETUKAN' },
-            { id: 'v3', ratioStart: 0.7, ratioEnd: 1.0, text: 'TEMBUS TARGET TANPA HENTI' }
-          ];
-        } else {
-          state.captions.lines = [
-            { id: 'l1', ratioStart: 0.0, ratioEnd: 0.34, text: 'BIARLAH SEMUA BERLALU' },
-            { id: 'l2', ratioStart: 0.34, ratioEnd: 0.68, text: 'PACU KECEPATAN DI SETIAP BEAT' },
-            { id: 'l3', ratioStart: 0.68, ratioEnd: 1.0, text: 'GAS TERUS SAMPAI GARIS AKHIR' }
-          ];
-        }
-        renderCaptionsSheet();
-        renderTimeline();
-        renderPreviewFrame();
-        showToast('Auto Captions diperbarui');
-      });
-
-      document.getElementById('sliderCaptionY').addEventListener('input', (e) => {
-        state.captions.yPercent = +e.target.value;
-        document.getElementById('valCaptionY').textContent = `${state.captions.yPercent}%`;
-        scheduleAutoSave();
-        renderPreviewFrame();
-      });
-
-      document.getElementById('btnMediaAddPreset').addEventListener('click', () => {
-        pushHistory('Tambah Klip Aksi');
-        const nextNum = state.clips.length + 1;
-        const newClip = {
-          id: 'c_' + Date.now(),
-          name: `Track_Shot_${nextNum}.mp4`,
-          sourceTotalSec: 12.0,
-          sourceInSec: 2.0,
-          durationSec: 1.8,
-          colorA: '#0369A1',
-          colorB: '#0F172A',
-          fx: 'ZOOM_PUNCH',
-          velocity: 'NORMAL',
-          transitionOut: 'NONE',
-          videoEl: null
-        };
-        state.clips.push(newClip);
-        state.selectedClipId = newClip.id;
-        renderMediaBinSheet();
+        pushHistory('Auto Captions Beat');
+        const total = getTotalDuration();
+        const segDur = +(total / 3).toFixed(2);
+        const phrases = ['BIARLAH SEMUA BERLALU', 'PACU KECEPATAN DI SETIAP BEAT', 'GAS TERUS SAMPAI GARIS AKHIR'];
+        phrases.forEach((phrase, i) => {
+          state.textLayers.push({
+            id: 'cap_' + Date.now() + '_' + i,
+            text: phrase,
+            startSec: +(i * segDur).toFixed(2),
+            durationSec: segDur,
+            fontId: 'ADVERCASE',
+            styleId: 'KARAOKE',
+            fontSize: 30,
+            color: '#FFFFFF',
+            xPercent: 50,
+            yPercent: 76
+          });
+        });
         renderAll();
-        showToast(`Klip ${newClip.name} ditambahkan`);
+        closeSheet('sheetCaptions');
+        showToast('3 layer Auto Captions ditambahkan ke timeline');
       });
 
       /* =========================================================
-         EXPORT RENDER & NATIVE ANDROID SAVE
+         EXPORT RENDER WITH AUDIO MIXING & NATIVE ANDROID SAVE
          ========================================================= */
       document.getElementById('btnExport').addEventListener('click', async () => {
         if (state.isPlaying) togglePlay(false);
         persistProjectNow(true);
 
         const ratioStr = ASPECT_RATIOS[state.aspectIdx];
-        const resStr = RESOLUTIONS[state.resIdx];
-        document.getElementById('projectModalTitle').textContent = `Export Video ${resStr} (${ratioStr})`;
+        document.getElementById('projectModalTitle').textContent = `Export Video + Audio (${ratioStr})`;
         document.getElementById('projectModalBody').innerHTML = `
           <div style="text-align:center;padding:12px 0;">
             <div id="exportStatusText" style="font-weight:700;color:#FFFFFF;margin-bottom:8px;">
-              Merender frame &amp; caption ${CAPTION_FONTS.find(f => f.id === state.captions.fontId).label}...
+              Merender multi-layer timeline, filter &amp; teks...
             </div>
             <div style="height:8px;background:var(--bg-obsidian);border-radius:99px;overflow:hidden;border:1px solid var(--border-strong);margin-bottom:8px;">
               <div id="exportProgressBar" style="width:8%;height:100%;background:linear-gradient(90deg,#0057B8,#22D3EE);transition:width 0.15s;"></div>
@@ -3538,30 +4379,61 @@
 
         let recorder = null;
         const chunks = [];
+
         try {
           if (previewCanvas.captureStream && window.MediaRecorder) {
-            const stream = previewCanvas.captureStream(30);
-            recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+            const canvasStream = previewCanvas.captureStream(30);
+            const combinedTracks = [...canvasStream.getVideoTracks()];
+
+            if (state.audio.audioEl || state.voiceover.audioEl) {
+              try {
+                const mixCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const dest = mixCtx.createMediaStreamDestination();
+
+                if (state.audio.audioEl) {
+                  const musicSrc = mixCtx.createMediaElementSource(state.audio.audioEl);
+                  const musicGain = mixCtx.createGain();
+                  const duck = (state.audio.autoDucking && state.voiceover.audioEl) ? 0.28 : 1.0;
+                  musicGain.gain.value = (state.audio.musicVol / 100) * duck;
+                  musicSrc.connect(musicGain);
+                  musicGain.connect(dest);
+                  state.audio.audioEl.currentTime = state.audio.startOffsetSec;
+                  state.audio.audioEl.play();
+                }
+
+                if (state.voiceover.audioEl) {
+                  const voSrc = mixCtx.createMediaElementSource(state.voiceover.audioEl);
+                  voSrc.connect(dest);
+                  state.voiceover.audioEl.currentTime = 0;
+                  state.voiceover.audioEl.play();
+                }
+
+                dest.stream.getAudioTracks().forEach(tr => combinedTracks.push(tr));
+              } catch (_) {}
+            }
+
+            const finalStream = new MediaStream(combinedTracks);
+            recorder = new MediaRecorder(finalStream, { mimeType: 'video/webm' });
             recorder.ondataavailable = (ev) => { if (ev.data && ev.data.size > 0) chunks.push(ev.data); };
             recorder.start();
           }
         } catch (_) {}
 
-        const steps = 28;
+        const steps = 30;
         for (let i = 0; i <= steps; i++) {
           const pct = Math.round((i / steps) * 100);
           state.playheadSec = (i / steps) * totalDur;
-          renderPreviewFrame();
+          renderPreviewFrame(null, null, true);
           updateTimecode();
           if (progressBar) progressBar.style.width = `${pct}%`;
           await new Promise(r => setTimeout(r, 45));
         }
 
+        if (state.audio.audioEl) try { state.audio.audioEl.pause(); } catch (_) {}
+        if (state.voiceover.audioEl) try { state.voiceover.audioEl.pause(); } catch (_) {}
+
         if (recorder && recorder.state !== 'inactive') {
-          await new Promise(resolve => {
-            recorder.onstop = resolve;
-            recorder.stop();
-          });
+          await new Promise(resolve => { recorder.onstop = resolve; recorder.stop(); });
           const blob = new Blob(chunks, { type: 'video/webm' });
           const safeSlug = (state.projectName || 'BeatSync').replace(/[^a-zA-Z0-9_-]/g, '_');
           const filename = `${safeSlug}-${ratioStr.replace(':', 'x')}-${Date.now()}.webm`;
@@ -3572,21 +4444,17 @@
         } else {
           if (statusText) statusText.textContent = 'Render preview selesai!';
         }
+        renderPreviewFrame();
         triggerHaptic(25);
       });
 
       window.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT') return;
-        if (e.code === 'Space') {
-          e.preventDefault();
-          togglePlay();
-        } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+        if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+        else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
           e.preventDefault();
           if (e.shiftKey) document.getElementById('btnRedo').click();
           else document.getElementById('btnUndo').click();
-        } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') {
-          e.preventDefault();
-          document.getElementById('btnRedo').click();
         }
       });
 
@@ -3598,7 +4466,6 @@
         renderPreviewFrame();
       }
 
-      // Restore last active project from Project History if available
       (function bootApp() {
         const savedList = loadProjectListFromStorage();
         const activeId = localStorage.getItem(STORAGE_ACTIVE_ID_KEY);
