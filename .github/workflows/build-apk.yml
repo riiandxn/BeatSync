@@ -1,45 +1,69 @@
-name: Build BeatSync Cut v2.0 APK
+name: Build BeatSync Cut v2.4 APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
-  build:
+  build-android-apk:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
           distribution: 'temurin'
+          java-version: '17'
 
-      - name: Setup Gradle 8.9
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.9'
+      - name: Install Capacitor dependencies
+        run: npm install
 
-      - name: Make gradlew executable if present
+      - name: Generate Android project
+        run: npx cap add android
+
+      - name: Configure Android permissions for Media, Mic & Storage
         run: |
-          if [ -f "./gradlew" ]; then
-            chmod +x ./gradlew
-          fi
+          python3 -c '
+          path = "android/app/src/main/AndroidManifest.xml"
+          with open(path, "r") as f:
+              content = f.read()
+          perms = "\n".join([
+              "    <uses-permission android:name=\"android.permission.INTERNET\" />",
+              "    <uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
+              "    <uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
+              "    <uses-permission android:name=\"android.permission.READ_MEDIA_VIDEO\" />",
+              "    <uses-permission android:name=\"android.permission.READ_MEDIA_AUDIO\" />",
+              "    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" android:maxSdkVersion=\"32\" />",
+              "    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" android:maxSdkVersion=\"29\" />",
+              "    <uses-permission android:name=\"android.permission.VIBRATE\" />"
+          ])
+          if "READ_MEDIA_VIDEO" not in content:
+              content = content.replace("<application", perms + "\n    <application", 1)
+          with open(path, "w") as f:
+              f.write(content)
+          '
+
+      - name: Sync web assets to Android
+        run: npx cap sync android
 
       - name: Build Debug APK
         run: |
-          if [ -f "./gradlew" ]; then
-            ./gradlew assembleDebug --no-daemon
-          else
-            gradle assembleDebug --no-daemon
-          fi
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
-      - name: Upload BeatSync Cut v2.0 APK
+      - name: Upload BeatSync Cut v2.4 APK
         uses: actions/upload-artifact@v4
         with:
-          name: BeatSync-Cut-v2.0-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+          name: BeatSync-Cut-v2.4-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
